@@ -1,34 +1,73 @@
-<style>
-/*--预设--*/ 
-body { padding:0px;margin: 0px; } 
-#lyrow, #lyrow input, #lyrow textarea { font-size:12px;font-family: 'Microsoft YaHei', '微软雅黑', MicrosoftJhengHei, '华文细黑', STHeiti, MingLiu; } 
-#lyrow { height:100vh;width: 100vw; } 
-#lyrow div { min-height: 18px;  } 
-#lyrow input, #lyrow textarea { border:rgb(235, 235, 235) 1px solid;border-radius: 3px;padding: 5px 8px;outline: 0; } 
-#lyrow input:hover, #lyrow textarea:hover { border: 1px solid #6bc1f2; } 
-/*--编辑--*/ 
-#lyrow .top { background-color:rgba(84, 237, 245, 1);height:60px !important; } 
-#lyrow .githubio { padding:0 0 0 36px;font-weight:bold;font-size:24px;position:relative;top:20%; } 
-#lyrow .mcsl {  } 
-#lyrow .mcshader { position:absolute;font-weight:bold;font-size:28px;left:2%;top:1%; } 
-#lyrow .tool { background-color:rgba(54, 54, 54, 1);width:8%;height:50%;border-radius:10px 10px 10px 10px;position:relative;top:7%;left:80%; } 
-#lyrow .tools { font-size:32px;font-weight:bold;position:absolute;left:90%;top:0.8%; } 
-#lyrow .translation { background-color:rgba(84, 237, 245, 1);width:96%;height:88%;position:absolute;top:9%;left:2%;border-radius:18px 18px 18px 18px; } 
-#lyrow .translation_a { background-color:rgba(255, 255, 255, 1);width:48%;top:11%;position:absolute;left:3%;height:48%;border-radius:18px 18px 18px 18px; } 
-#lyrow .translation_a_title { font-weight:bold;font-size:33px;position:absolute;top:2%;left:3%; } 
-#lyrow .translation_a_git { font-size:16px;font-weight:normal;position:absolute;top:12%;left:18px; } 
-#lyrow .translation_a_git_a { font-size:16px;position:absolute;top:12%;left:10%; } 
-
-</style>
-<!--下载font-awesome.css图标包-->
-<!--https://www.58html.com/html/template/font-awesome.zip-->
-<link rel="stylesheet" href="https://www.58html.com/gui/css/font-awesome/css/font-awesome.css?v=9">
-<div id="lyrow">
-<div class="top"> 
-    <a class="mcshader" href="lingxingmiao.github.io" target="_blank">MinecraftShader</a>
-<div class="translation"> </div>
-<div class="translation_a">
-    <h1 class="translation_a_title">翻译工具</h1>
-    <span class="translation_a_git">源码：</span>
-    <a class="translation_a_git_a" href="https://github.com/lingxingmiao/Tools/tree/main/Minecraft%20AI%E7%BF%BB%E8%AF%91%E5%B7%A5%E5%85%B7" target="_blank">GitHub</a> </div> </div>
-</div>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools</title>
+    <style>
+        .nav-bar {
+            background-color: #54edf5;
+            padding: 15px 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            border-radius: 18px;
+        }
+        .nav-links {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        a {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .tools-link {
+            margin-left: auto;
+        }
+        body {
+            padding: 10px;
+        }
+        .card {
+            background-color: #54edf5;
+            border-radius: 18px;
+            padding: 20px;
+            margin-top: 20px;
+            min-height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <div class="nav-links">
+            <a href="https://lingxingmiao.github.io" target="_self">MinecraftShader</a>
+        </div>
+    </div>
+    <div class="card">
+        <h3 style="margin: 0 0 15px 0;">翻译工具</h3>
+        源码：<a href="https://github.com/lingxingmiao/Tools/tree/main/Minecraft%20AI%E7%BF%BB%E8%AF%91%E5%B7%A5%E5%85%B7"
+           target="_blank"
+           style="color: #000; text-decoration: none; font-weight: bold;">
+            GitHub
+        </a>
+        <div style="margin-top: 10px;">
+            API：<a href="https://lmstudio.ai/"
+                 target="_blank"
+                 style="color: #000; text-decoration: none; font-weight: bold;">
+                LM Studio
+            </a>
+        </div>
+        <div style="margin-top: 10px;">
+            支持格式：.lang .json
+        </div>
+        <div style="margin-top: 10px;">
+            <img src="https://github.com/lingxingmiao/lingxingmiao.github.io/blob/main/image/lingxingmiao.Tools.Minecraft%20AI%E7%BF%BB%E8%AF%91.main2.png?raw=true"
+                 alt="工具截图"
+                 style="max-width: 100%; border-radius: 8px;">
+        </div>
+    </div>
+</body>
+</html>
