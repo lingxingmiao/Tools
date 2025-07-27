@@ -42,4 +42,4 @@ MinecraftAl翻译工具 默认使用LM Studio软件作为API。
 
 ### main4/main3_4
 
-整理工具，使用一个模板来整理文件排序（.lang）
+整理工具，使用一个模板来整理键值排序（.lang）
