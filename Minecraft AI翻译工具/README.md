@@ -18,7 +18,7 @@ MinecraftAl翻译工具 默认使用LM Studio软件作为API。
 
 ##### 7月
 
-- 修复 API Ked无法使用的问题；
+- 修复 API Ked 无法使用的问题；
 - 修复 正在翻译 进度在结尾总是少1的问题；
 - 更改 GUI内输出格式；
 - 更改 翻译失败后重试；
@@ -30,7 +30,7 @@ MinecraftAl翻译工具 默认使用LM Studio软件作为API。
 
 ##### 下一次
 
-- 修复 API URL不正确 模型列表 依旧显示的问题。
+- 修复 API URL 不正确 模型列表 依旧显示的问题。
 
 ### main2/main3_2
 
