@@ -27,14 +27,14 @@ MinecraftAl翻译工具 默认使用LM Studio软件作为API。
 - 删除 模型介绍；
 - 删除 最大上下文。
 
-main2/main3_2
+### main2/main3_2
 
 提示词合并工具，输入en_us与xx_xx来合并提示词（.lang）
 
-main3/main3_3
+### main3/main3_3
 
 键值检索工具，用来检索哪个文件缺少键值（.lang）
 
-main4/main3/4
+### main4/main3/4
 
 整理工具，使用一个模板来整理文件排序（.lang）
