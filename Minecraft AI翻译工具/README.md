@@ -30,7 +30,7 @@ MinecraftAl翻译工具 默认使用LM Studio软件作为API。
 
 ##### 下一次
 
-- 修复 API URL不正确 模型列表依旧显示的问题。
+- 修复 API URL不正确 模型列表 依旧显示的问题。
 
 ### main2/main3_2
 
