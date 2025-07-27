@@ -36,6 +36,6 @@ MinecraftAl翻译工具 默认使用LM Studio软件作为API。
 
 键值检索工具，用来检索哪个文件缺少键值（.lang）
 
-### main4/main3/4
+### main4/main3_4
 
 整理工具，使用一个模板来整理文件排序（.lang）
