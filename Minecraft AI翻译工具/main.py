@@ -6,7 +6,6 @@ import requests
 import threading
 import datetime
 import re
-_TIMERNOFG = 0x0000000C
 
 class TranslatorApp:
     def __init__(self, root):
