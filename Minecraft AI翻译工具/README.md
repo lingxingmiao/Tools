@@ -9,6 +9,7 @@ MinecraftAl翻译工具 默认使用LM Studio软件作为API。
 ### main/main3_1
 
 翻译核心文件（.lang/.json）
+<img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/9f011c13-d7dc-4f61-9658-8796f44e0110" />
 
 #### 更新日志
 
@@ -28,12 +29,15 @@ MinecraftAl翻译工具 默认使用LM Studio软件作为API。
 - 删除 模型介绍；
 - 删除 最大上下文。
 
-##### 下一次
+##### 下次
 
 - 修复 API URL 不正确 模型列表 刷新后依旧显示的问题；
 - 修复 API URL 非仅基础地址 模型列表 无法刷新的问题；
 - 更改 将 翻译列表 改为 日志；
-- 新增 翻译耗时 功能。
+- 新增 翻译耗时 功能；
+- 新增 启用快速提示词 功能；
+  - 缓解 API 费用过高；
+  - 修复 提示词Token数量大于模型Token数量 导致的错误。
 
 ### main2/main3_2
 
