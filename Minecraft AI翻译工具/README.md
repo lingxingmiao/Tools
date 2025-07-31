@@ -11,7 +11,7 @@ MinecraftAl翻译工具 默认使用LM Studio软件作为API。
 ### main/main3_1
 
 翻译核心文件（.lang/.json）
-<img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/9f011c13-d7dc-4f61-9658-8796f44e0110" />
+<p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/022a9f8d-ae8d-40b1-831e-df75ce2d4297" /></p>
 
 #### 更新日志
 
