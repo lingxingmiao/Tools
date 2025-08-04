@@ -51,6 +51,9 @@ Translator Lang 默认使用LM Studio软件作为API。
 
 ##### 下次
 
+- 修复 部分 暂停翻译 导致的BUG；
+- 新增 词条翻译耗时 功能。
+
 ### main2/main3_2
 
 提示词合并工具，输入en_us与xx_xx来合并提示词（.lang）
