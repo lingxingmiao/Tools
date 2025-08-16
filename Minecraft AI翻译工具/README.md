@@ -11,7 +11,7 @@ Translator Lang 默认使用LM Studio软件作为API。
 ### main/main3_1
 
 翻译核心文件（.lang/.json）
-<p align="center"><img width="1282" height="752" alt="C6FF59BA587238A2C2D5F5789F49B07C" src="https://github.com/user-attachments/assets/143aa5fa-9798-495c-84ed-26eeb11516b6" /></p>
+<p align="center"><img width="1282" height="752" alt="未标题-5" src="https://github.com/user-attachments/assets/a418c554-3020-4cdb-b582-5a270ced4d62" /></p>
 
 #### 更新日志
 
@@ -23,13 +23,13 @@ Translator Lang 默认使用LM Studio软件作为API。
 
 - 修复 API Ked 无法使用的问题；
 - 修复 正在翻译 进度在结尾总是少1的问题；
-- 更改 GUI内输出格式；
-- 更改 翻译失败后重试；
-- 新增 模型列表 刷新功能；
-- 新增 键值输入 功能；
-- 新增 v1模式 功能；
-- 删除 模型介绍；
-- 删除 最大上下文。
+- 改进 GUI内输出格式；
+- 改进 翻译失败后重试；
+- 添加 模型列表 刷新功能；
+- 添加 键值输入 功能；
+- 添加 v1模式 功能；
+- 移除 模型介绍；
+- 移除 最大上下文。
 
 ##### 8月
 
@@ -40,11 +40,11 @@ Translator Lang 默认使用LM Studio软件作为API。
 - 修复 无 system_prompt.txt 导致崩溃的问题；
 - 更改 将 翻译列表 改为 日志；
 - 更改 GUI界面布局；
-- 新增 暂停翻译 功能，并添加一些BUG；
-- 新增 停止翻译 功能，并添加一些BUG；
-- 新增 翻译耗时 提示词处理耗时 提示词比较耗时 功能；
-- 新增 软件图标；
-- 新增 启用快速提示词 功能；
+- 添加 暂停翻译 功能，并添加一些BUG；
+- 添加 停止翻译 功能，并添加一些BUG；
+- 添加 翻译耗时 提示词处理耗时 提示词比较耗时 功能；
+- 添加 软件图标；
+- 添加 启用快速提示词 功能；
   - 缓解 API 费用过高；
   - 修复 完整输入错误率过高的问题；
   - 修复 提示词Token数量大于模型Token数量 导致的问题。
@@ -52,9 +52,10 @@ Translator Lang 默认使用LM Studio软件作为API。
 ##### 下次
 
 - 修复 部分 暂停翻译 导致的BUG；
-- 新增 词条翻译耗时 功能；
-- 新增 预计耗时 与 剩余时长 功能；
-- 新增 思考等级 功能（用于兼容GPT-OSS）。
+- 添加 词条翻译耗时 功能；
+- 添加 预计耗时 与 剩余时长 功能；
+- 添加 思考等级 功能（用于兼容GPT-OSS）；
+- 添加 系统提示词选择 功能。
 
 ### main2/main3_2
 
