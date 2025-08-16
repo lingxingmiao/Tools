@@ -11,7 +11,7 @@ Translator Lang 默认使用LM Studio软件作为API。
 ### main/main3_1
 
 翻译核心文件（.lang/.json）
-<p align="center"><img width="1282" height="752" alt="未标题-5" src="https://github.com/user-attachments/assets/a418c554-3020-4cdb-b582-5a270ced4d62" /></p>
+<p align="center"><img width="1282" height="752" alt="7e9b9a1f9bf77357e7e3e62acd75b33c" src="https://github.com/user-attachments/assets/80c19664-e2e3-469a-ab75-b4779667dd57" /></p>
 
 #### 更新日志
 
