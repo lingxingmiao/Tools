@@ -11,7 +11,7 @@ Translator Lang 默认使用LM Studio软件作为API。
 ### main/main3_1
 
 翻译核心文件（.lang/.json）
-<p align="center"><img width="1282" height="752" alt="7e9b9a1f9bf77357e7e3e62acd75b33c" src="https://github.com/user-attachments/assets/80c19664-e2e3-469a-ab75-b4779667dd57" /></p>
+<p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/69b597b5-bf54-4fff-bd08-a7786f20d6e5" /></p>
 
 #### 更新日志
 
@@ -53,10 +53,12 @@ Translator Lang 默认使用LM Studio软件作为API。
 
 - 修复 部分 暂停翻译 导致的BUG；
 - 改进 GUI界面布局；
+- 改进 API Key 以及 模型名称 可以从配置文件自动选择；
 - 添加 词条翻译耗时 功能；
 - 添加 预计耗时 与 剩余时长 功能；
 - 添加 思考等级 功能（用于兼容GPT-OSS）；
-- 添加 系统提示词选择 功能。
+- 添加 系统提示词选择 功能；
+- 添加 配置文件 功能（存储密钥以及模型名称）。
 
 ### main2/main3_2
 
