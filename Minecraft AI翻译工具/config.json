@@ -1,0 +1,9 @@
+{
+    "api_config": [
+        {"apiurl": "http://127.0.0.1:1234/", "name": "null", "model_search": true, "v1_mode": true},
+        {"apiurl": "https://api.deepseek.com/", "name": "DeepSeek", "model_search": false, "v1_mode": false, "model_list": ["deepseek-chat", "deepseek-reasoner"]}
+    ],
+    "api_key": [
+        {"name": "DeepSeek", "key":"sk-配置文件模板，不可使用**********"}
+    ]
+}
