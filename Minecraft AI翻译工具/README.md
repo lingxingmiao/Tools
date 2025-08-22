@@ -13,6 +13,8 @@ Translator Lang 默认使用LM Studio软件作为API。
 翻译核心文件（.lang/.json）
 <p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/69b597b5-bf54-4fff-bd08-a7786f20d6e5" /></p>
 
+##### “*”代表未完成
+
 #### 更新日志
 
 ##### 3月
@@ -54,10 +56,13 @@ Translator Lang 默认使用LM Studio软件作为API。
 - 修复 部分 暂停翻译 导致的问题；
 - 修复 正在翻译 无法检测斜杆的问题；
 - 修复 键值输入 可能导致的输出内容包含键值；
+- 改进 Json翻译函数；
 - 改进 GUI界面布局；
 - 改进 API Key 以及 模型名称 可以从配置文件自动选择；
 - 改进 键值输入的系统提示词；
 - 改进 API URL 下拉框自动刷新列表；
+- 添加 Zip格式光影 以及 *Jar格式模组 翻译；
+- 添加 *目标语言 功能；
 - 添加 词条翻译耗时 功能；
 - 添加 预计耗时 与 剩余时长 功能；
 - 添加 思考等级 功能（用于兼容GPT-OSS）；
