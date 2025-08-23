@@ -4,7 +4,7 @@
 
 Translator Lang 是一个用来翻译.lang格式与.json格式的翻译工具。
 
-Translator Lang 初衷是用来给光影包翻译的，最早的版本只能翻译.lang和.json，并且纯AI写BUG连连。
+Translator Lang 初衷是用来给光影包翻译的，最早的版本只能翻译.lang和.json，并且纯AI写BUG不断。
 
 ## 文件列表
 
