@@ -11,7 +11,7 @@ Translator Lang 默认使用LM Studio软件作为API。
 ### main/main3_1
 
 翻译核心文件（.lang/.json）
-<p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/7bbce080-86f5-4d17-81f4-18c6c628e5ff" /></p>
+<p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/9029434c-ce7f-4c29-b1ea-01a6fc923fad" /></p>
 
 ##### “*”代表未完成
 
@@ -62,6 +62,7 @@ Translator Lang 默认使用LM Studio软件作为API。
 - 改进 键值输入的系统提示词；
 - 改进 API URL 下拉框自动刷新列表；
 - 添加 Zip格式光影 以及 Jar格式模组 翻译（自动检测zh_cn缺失键值来减少翻译次数）；
+- 添加 新版本文件处理 功能（用于与 Zip格式光影 以及 Jar格式模组 配合）；
 - 添加 词条翻译耗时 功能；
 - 添加 预计耗时 与 剩余时长 功能；
 - 添加 思考等级 功能（用于兼容GPT-OSS）；
