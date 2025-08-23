@@ -96,7 +96,7 @@ Translator Lang 初衷是用来给光影包翻译的，最早的版本只能翻�
                 "deepseek-chat", 
                 "deepseek-reasoner"
         ]},{
-            "apiurl": "https://api.minimaxi.com/", #MiNiMax的另一个API没做兼容 “https://api.minimaxi.com/v1/text/chatcompletion_v2” 之前想做兼容的（json在加一个项），但是想了想又没做，一般API不会这么抽象
+            "apiurl": "https://api.minimaxi.com/", #MiniMax的另一个API没做兼容 “https://api.minimaxi.com/v1/text/chatcompletion_v2” 之前想做兼容的（json在加一个项），但是想了想又没做，一般API不会这么抽象
             "name": "MiniMax", 
             "model_search": false, 
             "v1_mode": true, 
