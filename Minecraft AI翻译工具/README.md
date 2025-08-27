@@ -12,6 +12,8 @@ Translator Lang 初衷是用来给光影包翻译的，最早的版本只能翻�
 
 翻译核心文件（.lang/.json）
 <p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/9029434c-ce7f-4c29-b1ea-01a6fc923fad" /></p>
+<p align="center"><img width="1282" height="752" alt="未标题-1" src="https://github.com/user-attachments/assets/76b2303e-4167-4531-bec5-a51bea6c14ea" /></p>
+
 
 ## 如何使用
 
