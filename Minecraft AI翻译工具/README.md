@@ -12,7 +12,7 @@ Translator Lang 初衷是用来给光影包翻译的，最早的版本只能翻�
 
 翻译核心文件（.lang/.json）
 <p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/9029434c-ce7f-4c29-b1ea-01a6fc923fad" /></p>
-<p align="center"><img width="1282" height="752" alt="未标题-1" src="https://github.com/user-attachments/assets/76b2303e-4167-4531-bec5-a51bea6c14ea" /></p>
+<p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/4249e5ba-593f-43e7-aea9-ab2ac655e6e1" /></p>
 
 
 ## 如何使用
@@ -206,9 +206,13 @@ Translator Lang 初衷是用来给光影包翻译的，最早的版本只能翻�
 - 修复 翻译Jar文件时把 json 格式识别成 lang 格式（下次可能识别成 json）；
 - 修复 停止翻译 是 self.translate_lang 返回 列表 导致程序红温的问题；
 - 修复 Jar翻译 json 格式覆盖至 en_us.json 的问题；
+- 修复 Lang翻译 注释报错的问题；
 - 改进 Jar翻译 json 格式不会排序的问题；
 - 改进 键值对 中的 值 为空时跳过翻译；
-- 添加 自定义模型温度系数 功能（先前删除的功能，未记录在更新日志）。
+- 改进 翻译配置 性能影响以及质量影响的文本；
+- 添加 Token/S、当前Token数、总计Token数 功能；
+- 添加 自定义模型温度系数 功能（先前删除的功能，未记录在更新日志）；
+- 添加 推测解码 功能（目前仅发现 [LMStudio](https://lmstudio.ai/) 可用使用）。
 
 ### main2/main3_2
 
