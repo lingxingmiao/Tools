@@ -4,7 +4,7 @@
 
 Translator Lang 是一个用来翻译.lang格式与.json格式的翻译工具。
 
-Translator Lang 初衷是用来给光影包翻译的，最早的版本只能翻译.lang和.json，并且纯AI写BUG不断。
+Translator Lang 对于 LMStudio API 有完整的兼容性。
 
 ## 文件列表
 
@@ -93,7 +93,7 @@ Translator Lang 初衷是用来给光影包翻译的，最早的版本只能翻�
 - 以下内容非标注Json格式：
 <pre style="white-space: pre-wrap; word-wrap: break-word;">
 {
-    "api_config": [
+    "api_config": [ #这里是翻译模型（LLM）的API
         {
             "apiurl": "http://127.0.0.1:1234/", #这里是API URL
             "name": "LMStudio", #这里是提供商的名称
@@ -148,6 +148,14 @@ Translator Lang 初衷是用来给光影包翻译的，最早的版本只能翻�
         },{
           "name": "MiniMax",
           "key":"你猜"
+        }
+    ],
+    "api_embedding": [ #这里是嵌入模型的选项，基本与以上相同
+        {
+            "apiurl": "http://127.0.0.1:1234/", 
+            "name": "LMStudio", 
+            "model_search": true, 
+            "v1_mode": true
         }
     ]
 }
