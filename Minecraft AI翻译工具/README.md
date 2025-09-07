@@ -235,6 +235,11 @@ Translator Lang 对于 LMStudio API 有完整的兼容性。
 - 添加 推测解码 功能（目前仅发现 [LMStudio](https://lmstudio.ai/) 可用使用）；
 - 添加 检索增强生成（RAG） 功能（必须启用快速提示词）.
 
+##### 下次
+
+- 修复 嵌入 API URL 更换时 API Key 不会更新的问题；
+- 改进 GUI界面布局。
+
 ### main2/main3_2
 
 提示词合并工具，输入en_us与xx_xx来合并提示词（.lang）
