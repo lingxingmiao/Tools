@@ -11,8 +11,9 @@ Translator Lang 对于 LMStudio API 有完整的兼容性。
 ### main/main3_1
 
 翻译核心文件（.lang/.json）
-<p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/9029434c-ce7f-4c29-b1ea-01a6fc923fad" /></p>
-<p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/522fc4fc-33ab-41c1-b415-34ff6b2a035b" /></p>
+<p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/57179691-160a-4147-aed4-a48f3f09b19e" /></p>
+<p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/8f8497b7-10a2-4784-82b8-dfbaa0c99c4b" /></p>
+<p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/609f272a-b8c3-44ef-a93e-7115a5a1dcba" /></p>
 
 
 ## 如何使用
@@ -316,6 +317,8 @@ Translator Lang 对于 LMStudio API 有完整的兼容性。
 
 - 修复 嵌入 API URL 更换时 API Key 不会更新的问题；
 - 修复 更改 API URL 时非从 API URL 获取模型地址时且模型列表没有填写不会自动替换为空的问题；
+- 修复 重新生成向量嵌入完成不会自动选择到新的 .npy 文件导致的 API 报错；
+- 修复 检索增强生成选择列表 已有与 嵌入模型 相同的文件，但未选择导致的重新生成；
 - 改进 图标从磁盘缓存改为内存缓存；
 - 改进 GUI界面布局；
 - 添加 预设设置配置文件。
