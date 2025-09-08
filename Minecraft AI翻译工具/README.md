@@ -239,7 +239,9 @@ Translator Lang 对于 LMStudio API 有完整的兼容性。
 
 - 修复 嵌入 API URL 更换时 API Key 不会更新的问题；
 - 修复 更改 API URL 时非从 API URL 获取模型地址时且模型列表没有填写不会自动替换为空的问题；
-- 改进 GUI界面布局。
+- 改进 图标从磁盘缓存改为内存缓存；
+- 改进 GUI界面布局；
+- 添加 预设设置配置文件。
 
 ### main2/main3_2
 
