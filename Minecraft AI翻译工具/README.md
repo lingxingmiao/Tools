@@ -157,6 +157,83 @@ Translator Lang 对于 LMStudio API 有完整的兼容性。
             "model_search": true, 
             "v1_mode": true
         }
+    ],
+    "api_key_embedding": [
+        {
+            "name": "阿里云百炼",
+            "key": "sk-*************de0dc35fa441ae"
+        }
+    ],
+    "预设": [ #这里存储软件预设
+        {
+            "name": "aaa",
+            "api_config": [
+                {
+                    "id": "llm_api_url",
+                    "value": "https://api.deepseek.com/"
+                },
+                {
+                    "id": "llm_api_key",
+                    "value": "sk-*************de0dc35fa441ae"
+                },
+                {
+                    "id": "llm_api_model",
+                    "value": "deepseek-chat"
+                },
+                {
+                    "id": "llm_api_v1",
+                    "value": false
+                },
+                {
+                    "id": "emb_api_url",
+                    "value": "https://dashscope.aliyuncs.com/compatible-mode/"
+                },
+                {
+                    "id": "emb_api_key",
+                    "value": "sk-*************e0dc35fa441ae"
+                },
+                {
+                    "id": "emb_api_model",
+                    "value": ""
+                },
+                {
+                    "id": "emb_api_v1",
+                    "value": true
+                }
+            ],
+            "translator_config": [
+                {
+                    "id": "context",
+                    "on": true
+                },
+                {
+                    "id": "key_value_input",
+                    "on": true
+                },
+                {
+                    "id": "reasoning_mode",
+                    "on": false,
+                    "value": 1
+                },
+                {
+                    "id": "quick_prompt",
+                    "on": true,
+                    "value": 3,
+                    "mode": "检索增强生成"
+                },
+                {
+                    "id": "custom_parameters",
+                    "on": true,
+                    "temperature": 0.0,
+                    "top_p": 0.0
+                },
+                {
+                    "id": "speculative_encoding",
+                    "on": false,
+                    "model": ""
+                }
+            ]
+        }
     ]
 }
 </pre>
