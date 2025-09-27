@@ -11,9 +11,8 @@ Translator Lang 对于 LMStudio API 有完整的兼容性。
 ### main/main3_1
 
 翻译核心文件（.lang/.json）
-<p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/57179691-160a-4147-aed4-a48f3f09b19e" /></p>
-<p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/8f8497b7-10a2-4784-82b8-dfbaa0c99c4b" /></p>
-<p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/609f272a-b8c3-44ef-a93e-7115a5a1dcba" /></p>
+<p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/76868cff-4ff2-4494-bda4-c95e5ed2162b" /></p>
+<p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/949b847d-b211-42d3-bf02-861a303b8b32" /></p>
 
 
 ## 如何使用
@@ -327,6 +326,14 @@ Translator Lang 对于 LMStudio API 有完整的兼容性。
   - 二次修复 translate_lang 函数 读取文件=2 时误把列表当作字符串处理；
 - 改进 图标从磁盘缓存改为内存缓存；
 - 改进 GUI界面布局；
+- 改进 检索增强生成 检索方法（可选择方案，Embedding Match - x-Phase）；
+  - 方法对比；
+    - 原先方法（EM-1P）：输入文本（<值>）匹配嵌入向量（<键>=<值>） --→ 输出匹配的文本（<键>=<值>）；
+    - 当前方法（EM-2P）：输入文本（<值>）匹配嵌入向量（<键>） --→ 匹配的文本进一步匹配提示词文本文档文件（<键>） --→ 输出从提示词文本文档文件匹配的文本（<键>=<值>）；
+      - 提升 提示词嵌入向量 生成时间；
+      - 提升 翻译准确度；
+      - 恶化 上下文长度；
+      - 恶化 词条翻译耗时；
 - 添加 预设设置配置文件；
 - 添加 替换翻译过的键值的值 与 记录翻译过的键值的值 功能。
 
