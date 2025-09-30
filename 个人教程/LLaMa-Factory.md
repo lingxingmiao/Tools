@@ -3,7 +3,7 @@
 # LLaMa-Factory
 - 本教程截取 https://zhuanlan.zhihu.com/p/695287607 https://github.com/hiyouga/LLaMA-Factory/blob/main/README_zh.md
 - 以防以后的自己看不懂所写的
-## 安装
+
 1. 安装虚拟环境以及Git<br>
 - 虚拟环境Miniconda：`https://www.anaconda.com/download/success`<br>
 - Git：`https://git-scm.com/downloads/win`<br>
