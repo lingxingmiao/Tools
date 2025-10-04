@@ -12,7 +12,7 @@ Translator Lang 对于 LMStudio API 有完整的兼容性。
 
 翻译核心文件（.lang/.json）
 <p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/76868cff-4ff2-4494-bda4-c95e5ed2162b" /></p>
-<p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/949b847d-b211-42d3-bf02-861a303b8b32" /></p>
+<p align="center"><img width="1282" height="752" alt="image" src="https://github.com/user-attachments/assets/98d1c1eb-c3db-41af-bf71-833c32f61b7e" /></p>
 
 
 ## 如何使用
@@ -320,7 +320,7 @@ Translator Lang 对于 LMStudio API 有完整的兼容性。
 - 添加 推测解码 功能（目前仅发现 [LMStudio](https://lmstudio.ai/) 可用使用）；
 - 添加 检索增强生成（RAG） 功能（必须启用快速提示词）.
 
-##### 下次
+##### 2025年10月初
 
 - 修复 嵌入 API URL 更换时 API Key 不会更新的问题；
 - 修复 更改 API URL 时非从 API URL 获取模型地址时且模型列表没有填写不会自动替换为空的问题；
@@ -342,6 +342,9 @@ Translator Lang 对于 LMStudio API 有完整的兼容性。
   - 加载 翻译缓存 到 系统提示词；
   - 导出 ChatML Alpaca 数据集；
   - 导入 Zip JAR 至翻译缓存。
+ 
+##### 下次（12月之后）
+- 睡觉。
 
 ##### 长久计划（大饼）
 - 多语言支持。
