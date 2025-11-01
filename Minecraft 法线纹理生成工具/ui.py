@@ -105,7 +105,7 @@ class UI:
             return
         
         
-        路径 = self.output_folder_var.get() if self.output_folder_var.get() else os.path.dirname('self.output_folder_entry')
+        路径 = self.output_folder_var.get() if self.output_folder_var.get() else os.path.dirname(self.output_folder_var.get())
         图片 = Normal_Texture().Read_Image(self.input_file_var.get())
         _n图片 = Normal_Texture().Image_to_Normal(图片, self.height_map_var.get())
         pil_img = Image.fromarray(_n图片, mode='RGBA')
@@ -117,4 +117,5 @@ class UI:
 # Example usage
 if __name__ == "__main__":
     app = UI()
+
     app.run()
