@@ -13,6 +13,7 @@ Eazy Normal 是专门针对萌新绘制 法线纹理 以及 视差纹理 的一�
 ## 如何使用（PyThon调用）
 <pre><code class="language-python">import os
 from PIL import Image
+from Normal_Texture_Lib import Normal_Texture
 图片文件 = r"C:\aaa.png"
 图片 = Normal_Texture().Read_Image(图片文件)
 _n图片 = Normal_Texture().Image_to_Normal(图片, True)
