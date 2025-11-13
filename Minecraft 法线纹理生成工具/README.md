@@ -26,6 +26,14 @@ def 参考(原始高度图片):
     _n图片 = nt.ImageTNormal(图片, True)
     nt.SaveImage(_n图片, f"{Path(原始高度图片).stem}_n.png")
 参考(r"machine_coil_nichrome.png")</code></pre>
+#### 下次
+<pre><code class="language-python">import Normal_Texture as nt
+from pathlib import Path
+def 参考(原始高度图片):
+    图片 = nt.ReadImage(原始高度图片)
+    _n图片 = nt.ImageTNormal(图片, [True, True, False]) # [高度图, 左上纹理空隙修复, 像素内法线]
+    nt.SaveImage(_n图片, f"{Path(原始高度图片).stem}_n.png")
+参考(r"machine_coil_nichrome.png")</code></pre>
 
 ### 更新日志
 
@@ -40,5 +48,12 @@ def 参考(原始高度图片):
 - 删除 cv2 作为依赖
 - 删除 os 作为依赖
 - 删除 参考 函数
-- 修复 角落像素没有数值的问题
+- 修复 角落像素没有数值的问题（左上纹理空隙修复）
 - 修复 黑色的值为 0 的问题
+
+#### 下次
+- 添加 像素内法线
+- 添加 左上纹理空隙修复（启用像素内法线无法使用）
+- 更改 ImageTNormal 传入参数
+
+<img width="560" height="1104" alt="参考示例" src="https://github.com/user-attachments/assets/e28f5bc5-611e-4007-a6a1-8f6490abd371" />
