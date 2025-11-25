@@ -55,6 +55,7 @@ def 参考(原始高度图片):
 - 添加 像素内法线
 - 添加 左上纹理空隙修复（启用像素内法线无法使用）
 - 添加 OpenCl加速（需要未加速的作为前置，虽然是AI写的 但是还是很好用）
+    - 512x加速350% 1025像素(32x+1)以下不使用OpenCl
 - 更改 ImageTNormal 传入参数
 
 <img width="560" height="1104" alt="参考示例" src="https://github.com/user-attachments/assets/e28f5bc5-611e-4007-a6a1-8f6490abd371" />
