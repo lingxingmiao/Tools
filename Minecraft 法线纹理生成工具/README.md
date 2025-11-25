@@ -26,8 +26,8 @@ def 参考(原始高度图片):
     _n图片 = nt.ImageTNormal(图片, True)
     nt.SaveImage(_n图片, f"{Path(原始高度图片).stem}_n.png")
 参考(r"machine_coil_nichrome.png")</code></pre>
-#### 下次
-<pre><code class="language-python">import Normal_Texture as nt
+#### 25年11月25日
+<pre><code class="language-python">import Normal_Texture_OpenCl as nt #自动识别OpenCl是否可用，未安装pyopencl不会启用OpenCl
 from pathlib import Path
 def 参考(原始高度图片):
     图片 = nt.ReadImage(原始高度图片)
@@ -55,6 +55,7 @@ def 参考(原始高度图片):
 - 添加 像素内法线
 - 添加 左上纹理空隙修复（启用像素内法线无法使用）
 - 添加 OpenCl加速（需要未加速的作为前置，虽然是AI写的 但是还是很好用）
+    - 需要前置 Normal_Texture
     - 512x加速350% 1025像素(32x+1)以下不使用OpenCl
 - 更改 ImageTNormal 传入参数
 
