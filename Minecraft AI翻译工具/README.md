@@ -1,6 +1,6 @@
 <p align="center"><img width="96" height="96" alt="image" src="https://github.com/user-attachments/assets/5c5f8e4f-a64e-4925-aa9a-6e3ab62322f0" /></p>
 
-# Translator Lang
+# Translator Lang（停止更新！）
 
 Translator Lang 是一个用来翻译.lang格式与.json格式的翻译工具。
 
