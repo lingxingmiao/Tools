@@ -30,22 +30,22 @@ class Mpbr:
         Returns:
             PIL.Image.Image: 完整法线纹理图像.
         """
-        灰度 = np.array(fp.convert('L'), np.float16) / 255.0
+        灰度 = np.array(fp.convert('L'), np.float32) / 255.0
         h, w = 灰度.shape
-        dx = np.clip((灰度[:, :-1] - 灰度[:, 1:] + 1) * 127.5, 0, 255).astype(np.uint8)
-        dy = np.clip((灰度[:-1] - 灰度[1:] + 1) * 127.5, 0, 255).astype(np.uint8)
-        dx = np.pad(dx, ((0, 0), (0, 1)), constant_values=127)
-        dy = np.pad(dy, ((0, 1), (0, 0)), constant_values=127)
+        dx = np.clip((灰度[:, :-1] - 灰度[:, 1:] + 1) * 127.5 + 0.5, 0, 255).astype(np.uint8)
+        dy = np.clip((灰度[:-1] - 灰度[1:] + 1) * 127.5 + 0.5, 0, 255).astype(np.uint8)
+        dx = np.pad(dx, ((0, 0), (0, 1)), constant_values=128)
+        dy = np.pad(dy, ((0, 1), (0, 0)), constant_values=128)
         dx = np.clip(128 + (dx.astype(int) - 128) * (normal * 254 + 1), 0, 255).astype(np.uint8)
         dy = np.clip(128 + (dy.astype(int) - 128) * (normal * 254 + 1), 0, 255).astype(np.uint8)
-        法线矩阵 = np.full((h * 8, w * 8, 2), 127, np.uint8)
+        法线矩阵 = np.full((h * 8, w * 8, 2), 128, np.uint8)
         for k in range(8):
             法线矩阵[k::8, 7::8, 0] = dx
         法线矩阵[7::8, :, 1] = np.repeat(dy, 8, axis=1)
         r = 法线矩阵[..., 0]
-        r[:-1] = np.where(r[1:] != 127, r[1:], r[:-1])
+        r[:-1] = np.where(r[1:] != 128, r[1:], r[:-1])
         g = 法线矩阵[..., 1]
-        g[:, :-1] = np.where(g[:, 1:] != 127, g[:, 1:], g[:, :-1])
+        g[:, :-1] = np.where(g[:, 1:] != 128, g[:, 1:], g[:, :-1])
         rgba = np.full((h * 8, w * 8, 4), 255, np.uint8)
         rgba[..., :2] = np.clip(法线矩阵, 0, 255).astype(np.uint8)
         rgba[..., 2] = np.repeat(np.repeat(255 - (灰度 + np.float16(ao * 255) * (np.float16(1.0) - 灰度)), 8, axis=0), 8, axis=1)
