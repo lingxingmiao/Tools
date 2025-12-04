@@ -15,5 +15,14 @@
   - 传入：string或PIL.Image.Image或numpy.ndarray
   - 返回：PIL.Image.Image(RGBA图像)
 - 创建 image2pbr 方法
-  - 传入：fp:PIL.Image.Image(高度图)，normal:numpy.float16(法线强度)，ao:numpy.float16(环境光遮蔽强度)
+  - 传入：fp:PIL.Image.Image(高度图)，normal:numpy.float16(法线强度0-1)，ao:numpy.float16(环境光遮蔽强度0-1)
   - 返回：PIL.Image.Image(法线纹理)
+#### 12月4日
+- 更改 image2pbr 方法
+  - 传入：fp:PIL.Image.Image(高度图)，normal:numpy.float16(法线强度:0-1)，ao:numpy.float16(环境光遮蔽强度:0-1)，eazy:numpy.uint16(简单模式:None-uint16)
+  - 返回：PIL.Image.Image(法线纹理)
+- 新增简单模式（性能消耗≈15%）
+  - 现在你可以在 Photoshop 直接使用十六进制来控制深度了！
+  - #acbdef 表示深 abe.cdf 像素，末尾值位0 f F会被删除，您需要在 eazy:numpy.uint16 传入法线纹理的分辨率
+  - 示例：#2185f0 = 深28.15(28f.150)像素，如果图像分辨率为128那么深度最大为32，需要在 eazy:numpy.uint16 传入图像分辨率128
+  - 示例：#20f5f0 = 深2.05(2ff.050)像素，如果图像分辨率为16那么深度最大为4，需要在 eazy:numpy.uint16 传入图像分辨率16
