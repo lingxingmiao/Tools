@@ -1,7 +1,6 @@
 import numpy as np
 from PIL import Image as img
 from scipy.ndimage import uniform_filter
-import time
 
 class Mpbr:
     def open(fp: str | img.Image | np.ndarray) -> img.Image:
@@ -78,4 +77,3 @@ class Mpbr:
         RGBA矩阵[:, :, 3] = np.repeat(np.repeat(灰度, 8, axis=0), 8, axis=1)
         RGBA矩阵 = img.fromarray(RGBA矩阵)
         return RGBA矩阵
-
