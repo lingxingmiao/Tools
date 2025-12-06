@@ -21,7 +21,7 @@ class Mpbr:
             image = img.fromarray(fp)
         image = image.convert('RGBA')
         return image
-    def image2pbr(fp: img.Image, normal: np.float16 = 1.3, ao_int: np.uint8 = 1, ao_rad: np.uint8 = 3, eazy_mode: str = None, eazy: np.uint16 = 16) -> img.Image:
+    def image2pbr(fp: img.Image, normal: np.float16 = 1.3, ao_int: np.uint8 = 2, ao_rad: np.uint8 = 3, eazy_mode: str = None, eazy: np.uint16 = 16) -> img.Image:
         """灰度图像生成法线纹理图像
 
         Args:
@@ -78,3 +78,4 @@ class Mpbr:
         RGBA矩阵[:, :, 3] = np.repeat(np.repeat(灰度, 8, axis=0), 8, axis=1)
         RGBA矩阵 = img.fromarray(RGBA矩阵)
         return RGBA矩阵
+
