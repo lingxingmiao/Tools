@@ -39,9 +39,9 @@ class Mpbr:
         else:
             def 单像素转换(_r, _g, _b):
                 a_, b_, c_, d_, e_, f_ = f"{_r:02x}{_g:02x}{_b:02x}"
-                if eazy_mode is "decimal":
+                if eazy_mode == "decimal":
                     深度值 = f"{b_}{d_}{f_}.{a_}{c_}{e_}"
-                elif eazy_mode is "integer":
+                elif eazy_mode == "integer":
                     深度值 = f"{a_}{c_}{e_}.{b_}{d_}{f_}"
                 深度值 = 深度值.replace('f', '').replace('F', '')
                 灰度值 = 0.0 if 深度值 == "." else float(深度值)
