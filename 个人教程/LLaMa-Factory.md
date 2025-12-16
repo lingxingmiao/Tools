@@ -32,7 +32,7 @@
 - 你现在应该在LLaMa-Factory环境中的LLaMa-Factory目录里面，它会复制到LLaMa-Factory文件夹里的Qwen2.5-3B文件夹
 - 然后打开 WebUI：`llamafactory-cli webui`
 - 填写 模型路径 模型名称 数据文件夹的路径 和数据集，（是否使用混合精度训练）这个是坑小心点 有的显卡不支持bf16就选fp16还不行就选fp32，有些显卡fp32性能比fp16好就用fp32
-- 然后就可以直接开始了，最左边第一个按钮可以生成PowerShell用的命令，橘色的按钮可以直接开始
+- 然后就可以直接开始了，最左边第一个按钮可以生成PowerShell用的命令，橘色的按钮可以直接开始（运行不加在启动wenbui添加`$env:CUDA_VISIBLE_DEVICES = "0"`）
 5. 模型合并导出
 <pre style="white-space: pre-wrap; word-wrap: break-word;">
 llamafactory-cli export `
