@@ -6,6 +6,8 @@ Translator Lang 是一个用来翻译.lang格式与.json格式的翻译工具。
 
 Translator Lang 对于 LMStudio API 有完整的兼容性。
 
+停止更新理由：我写的全是史维护不了了。
+
 ## 文件列表
 
 ### main/main3_1
