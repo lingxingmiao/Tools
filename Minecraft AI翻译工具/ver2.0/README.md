@@ -38,7 +38,7 @@ Translator Minecraft 是 Translator Lang 的神经续作（第一个版本维护
 ## 编译
 <pre><code class="language-PowerShell">conda create -n Translator_Minecraft python=3.12 -y
 conda activate Translator_Minecraft
-pip install pyinstaller==3.2.1 numpy faiss-cpu tqdm requests
+pip install pyinstaller numpy faiss-cpu tqdm requests
 pyinstaller -F --hidden-import=requests "TranslatorLib Release.1.py"
 conda deactivate
 conda env remove -n Translator_Minecraft
