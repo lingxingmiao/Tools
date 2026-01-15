@@ -13,7 +13,7 @@ Translator Minecraft 是 Translator Lang 的神经续作（第一个版本维护
 - 思考等级
 ### 以后做的功能
 - 滚木
-## 何用法
+## 如何使用
 安装 `pip install faiss-cpu` 以及 `pip install numpy`
 <pre><code class="language-python">if __name__ == "__main__":
     翻译资源文件(r"C:\Users\FengMang\Desktop\Translator Minecraft\zbgt-0.16.2.jar",
@@ -23,9 +23,7 @@ Translator Minecraft 是 Translator Lang 的神经续作（第一个版本维护
     导出数据集("Alpaca")
     
     导入参考词("http://127.0.0.1:25564/v1/embeddings", "", "text-embedding-nomic-embed-text-v1.5-embedding")</code></pre>
-剩下自己摸索，都配置好了不用动
-## API哪来
-API 那肯定是自己部署划算啊！
+## API来源
 通用/英伟达/AMD：[LM Studio](https://lmstudio.ai/)
 英特尔：[Ollama](https://zhuanlan.zhihu.com/p/29653307917)
 #### 推荐模型
@@ -33,15 +31,15 @@ API 那肯定是自己部署划算啊！
 - [NomicEmbed文本嵌入v2专家混合8*227M 768维](https://hf-mirror.com/nomic-ai/nomic-embed-text-v2-moe-GGUF/tree/main)（推荐 Q8_0 Q4_K_S，缺点只支持 512 Tokens）（Q8_0 参考速度：133）
 - [NomicEmbed文本嵌入v1.5 33M 768维](https://hf-mirror.com/nomic-ai/nomic-embed-text-v1.5-GGUF/tree/main)（推荐 F16，非常平衡，最推荐的一个）（F16 参考速度：108）
 - [通义千问嵌入0.6B 1024维](https://hf-mirror.com/Casual-Autopsy/Qwen3-Embedding-0.6B-GGUFs/tree/main)（推荐 Q4_K_S，这个上下文长度巨吃显存）（Q4_0 参考速度：137）
-- [通义千问嵌入8B 4096维](https://hf-mirror.com/JonathanMiddleton/Qwen3-Embedding-8B-GGUF/tree/main)（你看我像显存吗 推荐 Q4_K_M，这个上下文长度巨吃显存）(Q4_K_M 参考速度：57)
 ##### 翻译模型
-- [混元翻译7B](https://hf-mirror.com/mradermacher/HY-MT1.5-7B-GGUF/tree/main)（仅适合冒险模组）（8G 显存选 Q5_K_S，首 Token 特快）（Q5_K_S 参考速度：73+ Tokens）
 - [通义千问3 80B-A3B](https://hf-mirror.com/unsloth/Qwen3-Next-80B-A3B-Instruct-GGUF/tree/main)（我V100 16G显存不够我用的 UD-IQ2_XXS）（UD-IQ2_XXS 参考速度：7.3+ Tokens）
 - [通义千问3 30B-A3B](https://hf-mirror.com/mradermacher/Qwen3-30B-A3B-Instruct-2507-i1-GGUF/tree/main)（推荐 IQ3_M，还算不错）（IQ3_M 参考速度：50+ Tokens）
 - [通义千问2.5 14B](https://hf-mirror.com/Mungert/Qwen2.5-14B-Instruct-1M-GGUF/tree/main)（推荐 Q5_K_S IQ3_M，这个一直很稳定的，但是费电，显存不够用这个）（F16-Q4 参考速度：47+ Tokens）
-#### 速度参考基准
-- CPU：2696V3
-- GPU：V100 SXM2 16G
-- RAM：4通道 1800MHz
-</br>翻译：尽可能卸载到GPU内，K V 缓存量化 Q8_0，开启快速注意力，8 位砖家，问题：怎么证明AI是AI自己</br>
-嵌入：512 Tokens 上下文长度处理固定内容。
+## 编译
+<pre><code class="language-PowerShell">conda create -n Translator_Minecraft python=3.12 -y
+conda activate Translator_Minecraft
+pip install pyinstaller==3.2.1 numpy faiss-cpu tqdm requests
+pyinstaller -F --hidden-import=requests "TranslatorLib Release.1.py"
+conda deactivate
+conda env remove -n Translator_Minecraft
+</code></pre>
