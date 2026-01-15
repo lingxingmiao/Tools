@@ -14,15 +14,19 @@ Translator Minecraft 是 Translator Lang 的神经续作（第一个版本维护
 ### 以后做的功能
 - 滚木
 ## 如何使用
-安装 `pip install faiss-cpu` 以及 `pip install numpy`
-<pre><code class="language-python">if __name__ == "__main__":
-    翻译资源文件(r"C:\Users\FengMang\Desktop\Translator Minecraft\zbgt-0.16.2.jar",
-        "http://127.0.0.1:25564/v1/chat/completions", "", "千问3-30b-a3b-动态量化-iq3_m",
-        "http://127.0.0.1:25564/v1/embeddings", "", "text-embedding-nomic-embed-text-v1.5-embedding")
+先按照 编译 进行构建
+<pre><code class="language-PowerShell">& "TranslatorLib Release.1.exe" TranslatorLang --file0 "en_us.lang" --output-path "zh_cn.json" --llm-api-url "http://127.0.0.1:25564/v1/chat/completions" --llm-model "千问3-30b-a3b-动态量化-iq3_m" --emb-api-url "http://127.0.0.1:25564/v1/embeddings" --emb-model  "text-embedding-nomic-embed-text-v1.5-embedding"
+
+& "TranslatorLib Release.1.exe" TranslatorPack --file0 "zbgt-0.16.2.jar" --llm-api-url "http://127.0.0.1:25564/v1/chat/completions" --llm-model "千问3-30b-a3b-动态量化-iq3_m" --emb-api-url "http://127.0.0.1:25564/v1/embeddings" --emb-model  "text-embedding-nomic-embed-text-v1.5-embedding"
     
-    导出数据集("Alpaca")
+& "TranslatorLib Release.1.exe" ExportJsonl --mode "Alpaca"
     
-    导入参考词("http://127.0.0.1:25564/v1/embeddings", "", "text-embedding-nomic-embed-text-v1.5-embedding")</code></pre>
+& "TranslatorLib Release.1.exe" ImportPrompt --path "C:\Users\FengMang\Desktop\Translator Minecraft\测试" --emb-api-url "http://127.0.0.1:25564/v1/embeddings" --emb-model "text-embedding-nomic-embed-text-v1.5-embedding"
+</code></pre>
+TranslatorLang方法 输入 Lang、Json 语言文件 输出 输出路径文件格式 语言文件</br>
+TranslatorPack方法 输入 模组、资源包 输出 资源包，输入 光影包 输出 光影包</br>
+ImportPrompt方法 导入所有文件夹下的 模组、光影包、Translator Minecraft生成的pkl文件</br>
+ExportJsonl方法 导出 ChatML、Alpaca 数据集 来训练模型</br>
 ## API来源
 通用/英伟达/AMD：[LM Studio](https://lmstudio.ai/)
 英特尔：[Ollama](https://zhuanlan.zhihu.com/p/29653307917)
