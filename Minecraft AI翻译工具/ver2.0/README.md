@@ -29,7 +29,7 @@ ImportPrompt方法 导入所有文件夹下的 模组、光影包、Translator M
 ExportJsonl方法 导出 ChatML、Alpaca 数据集 来训练模型</br>
 ## API来源
 通用/英伟达/AMD：[LM Studio](https://lmstudio.ai/)
-英特尔：[Ollama](https://zhuanlan.zhihu.com/p/29653307917)
+英特尔：[Ollama](https://github.com/ipex-llm/ipex-llm/releases/tag/v2.2.0)
 #### 推荐模型
 ##### 嵌入模型
 - [NomicEmbed文本嵌入v2专家混合8*227M 768维](https://hf-mirror.com/nomic-ai/nomic-embed-text-v2-moe-GGUF/tree/main)（推荐 Q8_0 Q4_K_S，缺点只支持 512 Tokens）（Q8_0 参考速度：133）
