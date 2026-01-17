@@ -48,7 +48,7 @@ conda env remove -n Translator_Minecraft
 ## 更新日志
 ### Release.1.1 Bata.1
 - 添加 FTB任务 翻译支持
-- IndexFlatL2索引 改为 IndexHNSWSQ索引(BF16)
+- IndexFlatL2索引 改为 IndexHNSWSQ索引(SQ8)
 - ThreadPoolExecutor索引并发 改为 Faiss并行
 ### Release.1.1（计划）
 - 添加 FTB任务 翻译支持 √
