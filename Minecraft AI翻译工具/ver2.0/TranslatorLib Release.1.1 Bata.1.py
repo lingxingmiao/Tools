@@ -250,7 +250,7 @@ def 翻译语言列表(
     向量文件, 文本文件 = 参考词预处理(llm_system_prompt, emb_api_url, emb_api_key, emb_model, emb_max_token, emb_max_batch, emb_max_workers, emb_file_name, emb_file_path)
     if 文本文件:
         输入列表 = 并行生成向量(输入列表, emb_api_url, emb_api_key, emb_model, emb_max_token, emb_max_batch, emb_max_workers)
-        向量索引 = faiss.IndexHNSWSQ(向量文件.shape[1], faiss.ScalarQuantizer.QT_bf16, 80)
+        向量索引 = faiss.IndexHNSWSQ(向量文件.shape[1], faiss.ScalarQuantizer.QT_8bit, 80)
         向量索引.hnsw.efConstruction = 480
         向量索引.hnsw.efSearch = 480
         for _ in tqdm(range(1), desc="构建索引"):
@@ -902,3 +902,4 @@ if __name__ == "__main__":
     else:
 
         解释器0.print_help()
+
