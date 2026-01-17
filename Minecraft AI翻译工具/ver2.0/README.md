@@ -11,8 +11,6 @@ Translator Minecraft 是 Translator Lang 的神经续作（第一个版本维护
 - GUI
 - 推测解码
 - 思考等级
-### 以后做的功能
-- 滚木
 ## 如何使用
 先按照 编译 进行构建
 <pre><code class="language-PowerShell">& "TranslatorLib Release.1.exe" TranslatorLang --file0 "en_us.lang" --output-path "zh_cn.json" --llm-api-url "http://127.0.0.1:25564/v1/chat/completions" --llm-model "千问3-30b-a3b-动态量化-iq3_m" --emb-api-url "http://127.0.0.1:25564/v1/embeddings" --emb-model  "text-embedding-nomic-embed-text-v1.5-embedding"
@@ -48,3 +46,13 @@ pyinstaller -F --hidden-import=requests "TranslatorLib Release.1.py"
 conda deactivate
 conda env remove -n Translator_Minecraft
 </code></pre>
+## 更新日志
+### Release.1.1 Bata.1
+- 添加 FTB任务 翻译支持
+- IndexFlatL2索引 改为 IndexHNSWSQ索引(BF16)
+- ThreadPoolExecutor索引并发 改为 Faiss并行
+### Release.1.1（计划）
+- 添加 FTB任务 翻译支持 √
+- 添加 BQ任务 翻译支持
+- 添加 HQM任务 翻译支持
+- 思考模型支持
