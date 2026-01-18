@@ -40,7 +40,7 @@ ExportJsonl方法 导出 ChatML、Alpaca 数据集 来训练模型</br>
 <pre><code class="language-PowerShell">conda create -n Translator_Minecraft python=3.12 -y
 conda activate Translator_Minecraft
 pip install pyinstaller numpy faiss-cpu tqdm requests pyhocon nbtlib
-# 构建EXE 向量存储 向量索引 进度显示* 网络请求* FTBsnbt编解码 HQjson编解码
+# 构建EXE 向量存储 向量索引 进度显示* 网络请求* FTB任务snbt编解码 BQ任务json编解码
 pyinstaller -F --hidden-import=requests "TranslatorLib Release.1.py"
 conda deactivate
 conda env remove -n Translator_Minecraft
