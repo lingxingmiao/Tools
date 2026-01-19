@@ -58,6 +58,8 @@ conda env remove -n Translator_Minecraft
 - 修复 上下文 system 位置
 - 修复 系统提示词为 system 时不会添加 user 的问题
 - 添加 最大历史上下文
+### Release.1
+- 添加 文件传入参数 （如何使用 这一栏）
 ### Release.1.1 Bata.1
 - 添加 FTBQ任务 翻译支持
 - 更改 IndexFlatL2索引 改为 IndexHNSWSQ索引(SQ8)
