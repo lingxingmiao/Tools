@@ -39,19 +39,38 @@ ExportJsonl方法 导出 ChatML、Alpaca 数据集 来训练模型</br>
 ## 编译
 <pre><code class="language-PowerShell">conda create -n Translator_Minecraft python=3.12 -y
 conda activate Translator_Minecraft
-pip install pyinstaller numpy faiss-cpu tqdm requests pyhocon nbtlib
-# 构建EXE 向量存储 向量索引 进度显示* 网络请求* FTB任务snbt编解码 BQ任务json编解码
+pip install pyinstaller numpy faiss-cpu tqdm requests pyhocon 
+# 构建EXE 向量存储 向量索引 进度显示* 网络请求* FTB任务snbt编解码
 pyinstaller -F --hidden-import=requests "TranslatorLib Release.1.py"
 conda deactivate
 conda env remove -n Translator_Minecraft
 </code></pre>
 ## 更新日志
+### Release.1 Alpha.1
+- 添加 语言文件 翻译支持
+- 添加 IndexFlatL2方法RAG检索
+- 添加额外依赖 numpy faiss-cpu
+### Release.1 Bata.1
+- 添加 资源包 翻译支持（光影，模组，资源包）
+- 添加 导出数据集功能
+- 添加 导入参考词功能
+### Release.1 Bata.2
+- 修复 上下文 system 位置
+- 修复 系统提示词为 system 时不会添加 user 的问题
+- 添加 最大历史上下文
 ### Release.1.1 Bata.1
-- 添加 FTB任务 翻译支持
-- IndexFlatL2索引 改为 IndexHNSWSQ索引(SQ8)
-- ThreadPoolExecutor索引并发 改为 Faiss并行
-### Release.1.1（计划）
-- 添加 FTB任务 翻译支持 √
+- 添加 FTBQ任务 翻译支持
+- 更改 IndexFlatL2索引 改为 IndexHNSWSQ索引(SQ8)
+- 更改 ThreadPoolExecutor索引并发 改为 Faiss并行
+- 添加额外依赖 pyhocon
+### Release.1.1 Bata.2
+- ~~修复了一些已知的问题。~~
+- 修复 IndexHNSWSQ索引 没有训练就构建的错误
 - 添加 BQ任务 翻译支持
-- 添加 HQM任务 翻译支持
 - 思考模型支持
+### Release.1.1（计划）
+- 添加 FTB任务 翻译支持 （选定版本 1.12.2 1.20.1） √
+- 添加 BQ任务 翻译支持 （选定版本 1.7.10 1.12.2） √
+- 添加 帕秋莉手册 翻译支持
+- 添加 HQM任务 翻译支持 （等待 1.7.10 解码方案）
+- 思考模型支持 √
