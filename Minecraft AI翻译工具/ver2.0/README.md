@@ -51,7 +51,7 @@ conda env remove -n Translator_Minecraft
 - 添加 IndexFlatL2方法RAG检索
 - 添加额外依赖 numpy faiss-cpu
 ### Release.1 Bata.1
-- 添加 资源包 翻译支持（光影，模组，资源包）
+- 添加 资源包 翻译支持 （光影，模组，资源包）
 - 添加 导出数据集功能
 - 添加 导入参考词功能
 ### Release.1 Bata.2
@@ -73,6 +73,4 @@ conda env remove -n Translator_Minecraft
 ### Release.1.1（计划）
 - 添加 FTB任务 翻译支持 （选定版本 1.12.2 1.20.1） √
 - 添加 BQ任务 翻译支持 （选定版本 1.7.10 1.12.2） √
-- 添加 帕秋莉手册 翻译支持
-- 添加 HQM任务 翻译支持 （等待 1.7.10 解码方案）
 - 思考模型支持 √
