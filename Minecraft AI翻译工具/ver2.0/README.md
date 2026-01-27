@@ -35,6 +35,7 @@ ImportPromptI18n方法 输入 [Dict.json](https://github.com/VM-Chinese-translat
 #### 推荐模型
 ##### 特征提取嵌入模型
 - [Multilingual-E5-large 0.6B 1024维](https://hf-mirror.com/nomic-ai/nomic-embed-text-v2-moe-GGUF/tree/main)
+- [Bge-Base-EN-v1.5 0.1B](https://hf-mirror.com/ChristianAzinn/bge-base-en-v1.5-gguf/tree/main)
 ##### 翻译模型
 - [通义千问3 80B-A3B](https://hf-mirror.com/unsloth/Qwen3-Next-80B-A3B-Instruct-GGUF/tree/main)（我V100 16G显存不够我用的 UD-Q2_K_XL）（UD-Q2_K_XL 砖家权重加载到CPU参考速度：14+ Tokens）
 - [通义千问3 30B-A3B](https://hf-mirror.com/mradermacher/Qwen3-30B-A3B-Instruct-2507-i1-GGUF/tree/main)（推荐 IQ3_M，还算不错）（IQ3_M 参考速度：50+ Tokens）
