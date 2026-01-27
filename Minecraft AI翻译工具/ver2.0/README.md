@@ -25,6 +25,10 @@ TranslatorLang方法 输入 Lang、Json 语言文件 输出 输出路径文件�
 TranslatorPack方法 输入 模组、资源包 输出 资源包，输入 光影包 输出 光影包</br>
 ImportPrompt方法 导入所有文件夹下的 模组、光影包、Translator Minecraft生成的pkl文件</br>
 ExportJsonl方法 导出 ChatML、Alpaca 数据集 来训练模型</br>
+TranslatorFTBQ方法 输入 config文件夹下的ftbquests文件夹 输出覆盖原有文件夹，请手动备份</br>
+TranslatorBQ方法 输入 config文件夹下的betterquesting文件夹 输出覆盖原有文件夹，请手动备份</br>
+ImportPromptI18n方法 输入 [Dict.json](https://github.com/VM-Chinese-translate-group/i18n-Dict-Extender)</br>
+
 ## API来源
 通用/英伟达/AMD：[LM Studio](https://lmstudio.ai/)
 英特尔：[Ollama](https://github.com/ipex-llm/ipex-llm/releases/tag/v2.2.0)
