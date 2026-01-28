@@ -43,8 +43,8 @@ ImportPromptI18n方法 输入 [Dict.json](https://github.com/VM-Chinese-translat
 ## 编译
 <pre><code class="language-PowerShell">conda create -n Translator_Minecraft python=3.12 -y
 conda activate Translator_Minecraft
-pip install pyinstaller numpy faiss-cpu tqdm requests pyhocon ujson
-# 构建EXE 向量存储 向量索引 进度显示* 网络请求* FTB任务snbt编解码 .json()优化
+pip install pyinstaller numpy faiss-cpu tqdm requests pyhocon ujson orjson
+# 构建EXE 向量存储 向量索引 进度显示* 网络请求* FTB任务snbt编解码 .json()优化 I18n词典导入优化
 pyinstaller -F --hidden-import=requests "TranslatorLib Release.1.py"
 conda deactivate
 conda env remove -n Translator_Minecraft
@@ -85,3 +85,4 @@ conda env remove -n Translator_Minecraft
 - 添加 已安装的整合包翻译支持
 - 添加 自动汉化更新 的 I18n词典 导入参考词功能 √
 - 添加 向量索引缓存功能（SHA3-384校验 .pkl 与 .npy 文件，生成 .faiss-sha3 与 .faiss 文件） √
+- 添加 额外依赖 orjson
