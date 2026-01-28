@@ -84,5 +84,5 @@ conda env remove -n Translator_Minecraft
 ### Release.1.2 （计划）
 - 添加 已安装的整合包翻译支持
 - 添加 自动汉化更新 的 I18n词典 导入参考词功能 √
-- 添加 向量索引缓存功能（SHA3-384校验 .pkl 与 .npy 文件，生成 .faiss-sha3 与 .faiss 文件） √
+- 添加 向量索引缓存功能（SHA3-256校验 .pkl 与 .npy 文件，生成 .faiss-sha3 与 .faiss 文件） √
 - 添加 额外依赖 orjson
