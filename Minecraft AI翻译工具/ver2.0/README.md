@@ -33,9 +33,9 @@ ImportPromptI18n方法 输入 [Dict.json](https://github.com/VM-Chinese-translat
 通用/英伟达/AMD：[LM Studio](https://lmstudio.ai/)
 英特尔：[Ollama](https://github.com/ipex-llm/ipex-llm/releases/tag/v2.2.0)
 #### 推荐模型
-##### 特征提取嵌入模型
-- [Multilingual-E5-large 0.6B 1024维](https://hf-mirror.com/nomic-ai/nomic-embed-text-v2-moe-GGUF/tree/main)
-- [Bge-Base-EN-v1.5 0.1B 768维度](https://hf-mirror.com/ChristianAzinn/bge-base-en-v1.5-gguf/tree/main)
+##### 嵌入模型
+- [NomicEmbed文本嵌入v2专家混合8*227M 768维](https://hf-mirror.com/nomic-ai/nomic-embed-text-v2-moe-GGUF/tree/main)（推荐 Q8_0 Q4_K_S，缺点只支持 512 Tokens）（Q8_0 参考速度：133）
+- [通义千问嵌入0.6B 1024维](https://hf-mirror.com/Casual-Autopsy/Qwen3-Embedding-0.6B-GGUFs/tree/main)（推荐 Q4_K_S，这个上下文长度巨吃显存）（Q4_0 参考速度：137）
 ##### 翻译模型
 - [通义千问3 80B-A3B](https://hf-mirror.com/unsloth/Qwen3-Next-80B-A3B-Instruct-GGUF/tree/main)（我V100 16G显存不够我用的 UD-Q2_K_XL）（UD-Q2_K_XL 砖家权重加载到CPU参考速度：14+ Tokens）
 - [通义千问3 30B-A3B](https://hf-mirror.com/mradermacher/Qwen3-30B-A3B-Instruct-2507-i1-GGUF/tree/main)（推荐 IQ3_M，还算不错）（IQ3_M 参考速度：50+ Tokens）
