@@ -83,6 +83,7 @@ conda env remove -n Translator_Minecraft
 - 添加 额外依赖 ujson
 ### Release.1.2 （计划）
 - 添加 已安装的整合包翻译支持
-- 添加 自动汉化更新 的 I18n词典 导入参考词功能 √
+- 添加 自动汉化更新 的 I18n词典 导入参考词功能（Dict DictMini） √
 - 添加 向量索引缓存功能（SHA3-256校验 .pkl 与 .npy 文件，生成 .faiss-sha3 与 .faiss 文件） √
+- 更改 存储的 .npy 向量文件 从 Float32_S1E8M23 改为 Float16_S1E2M13（存储为 Uint16） 格式（平均精度损失 3.05‱） √
 - 添加 额外依赖 orjson
