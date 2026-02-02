@@ -90,6 +90,5 @@ conda env remove -n Translator_Minecraft
     - Float16_S1M15(99.99999237%)
     - Int8+Float16(98.4445%)
     - Int4+Float16(96.8631%)
-    - Int2+Int8(84.3312%)
 - 修复 FTBQ 与 BQ 任务翻译无法传入的问题
 - 添加 额外依赖 orjson
