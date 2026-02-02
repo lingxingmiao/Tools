@@ -86,6 +86,6 @@ conda env remove -n Translator_Minecraft
 - 添加 自动汉化更新 的 I18n词典 导入参考词功能（Dict DictMini） √
 - 添加 向量索引缓存功能（SHA3-256校验 .pkl 与 .npy 文件，生成 .faiss-sha3 与 .faiss 文件） √
 - ~~更改 存储的 .npy 向量文件 从 Float32 改为 Float16_S1E2M13（存储为 Uint16） 格式（平均精度损失 3‱）~~ [源代码](https://github.com/lingxingmiao/Tools/blob/main/uo%C9%A5%CA%87%CA%8E%D4%80%E6%A8%A1%E5%9D%97.py)
-- 更改 存储的格式从 .npy 改为 .npz，Float32 改为 Int8 + Float16缩放（块大小=64） 格式（平均精度损失 1.55%） [源代码](https://github.com/lingxingmiao/Tools/blob/main/uo%C9%A5%CA%87%CA%8E%D4%80%E6%A8%A1%E5%9D%97.py)
+- 更改 存储的格式从 .npy 改为 .npz，Float32 改为 Int8 + Float16缩放（块大小=32） 格式（平均精度损失 1.55%） [源代码](https://github.com/lingxingmiao/Tools/blob/main/uo%C9%A5%CA%87%CA%8E%D4%80%E6%A8%A1%E5%9D%97.py)
 - 修复 FTBQ 与 BQ 任务翻译无法传入的问题
 - 添加 额外依赖 orjson
