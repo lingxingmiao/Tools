@@ -27,7 +27,7 @@ ImportPrompt方法 导入所有文件夹下的 模组、光影包、Translator M
 ExportJsonl方法 导出 ChatML、Alpaca 数据集 来训练模型</br>
 TranslatorFTBQ方法 输入 config文件夹下的ftbquests文件夹 输出覆盖原有文件夹，请手动备份</br>
 TranslatorBQ方法 输入 config文件夹下的betterquesting文件夹 输出覆盖原有文件夹，请手动备份</br>
-ImportPromptI18n方法 输入 [Dict.json](https://github.com/VM-Chinese-translate-group/i18n-Dict-Extender)</br>
+ImportPromptI18n方法 输入 [Dict-Mini.json](https://github.com/VM-Chinese-translate-group/i18n-Dict-Extender)</br>
 
 ## API来源
 通用/英伟达/AMD：[LM Studio](https://lmstudio.ai/)
@@ -43,8 +43,8 @@ ImportPromptI18n方法 输入 [Dict.json](https://github.com/VM-Chinese-translat
 ## 编译
 <pre><code class="language-PowerShell">conda create -n Translator_Minecraft python=3.12 -y
 conda activate Translator_Minecraft
-pip install pyinstaller numpy faiss-cpu tqdm requests pyhocon ujson orjson
-# 构建EXE 向量存储 向量索引 进度显示* 网络请求* FTB任务snbt编解码 .json()优化 I18n词典导入优化
+pip install pyinstaller numpy faiss-cpu tqdm requests pyhocon
+# 构建EXE 向量处理 向量索引 进度显示* 网络请求* FTB任务snbt编解码
 pyinstaller -F --hidden-import=requests "TranslatorLib Release.1.py"
 conda deactivate
 conda env remove -n Translator_Minecraft
@@ -81,14 +81,16 @@ conda env remove -n Translator_Minecraft
 - 添加 BQ任务 翻译支持 （选定版本 1.7.10 1.12.2）
 - 添加 思考模型支持
 - 添加 额外依赖 ujson
-### Release.1.2 （计划）
-- 添加 已安装的整合包翻译支持
-- 添加 自动汉化更新 的 I18n词典 导入参考词功能（Dict DictMini） √
-- 添加 向量索引缓存功能（SHA3-256校验 .pkl 与 .npy 文件，生成 .faiss-sha3 与 .faiss 文件） √
-- 更改 存储的格式从 .npy 改为 .npz，格式可选: √
+### Release.1.2 Bata.1
+- 添加 自动汉化更新 的 I18n词典 导入参考词功能（Dict-Mini.json）
+- 添加 向量索引缓存功能（SHA3-256校验 .pkl 与 .npy 文件，生成 .faiss-sha3 与 .faiss 文件）
+- 更改 存储的格式从 .npy 改为 .npz，格式可选:
     - Float32(100%)
     - Float16_S1M15(99.99999237%)
     - Int8+Float16(98.4445%)
     - Int4+Float16(96.8631%)
 - 修复 FTBQ 与 BQ 任务翻译无法传入的问题
-- 添加 额外依赖 orjson
+- 删除 额外依赖 ujson
+### Release.1.2 （计划）
+- 添加 已安装的整合包翻译支持
+
