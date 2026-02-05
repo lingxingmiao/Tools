@@ -91,6 +91,9 @@ conda env remove -n Translator_Minecraft
     - Int4+Float16(96.8631%)
 - 修复 FTBQ 与 BQ 任务翻译无法传入的问题
 - 删除 额外依赖 ujson
+### Release.1.2 Bata.2
+- 修复 单次多词 翻译键值映射问题
+- 更改 单次多词 格式
 ### Release.1.2 （计划）
 - 添加 已安装的整合包翻译支持
 
