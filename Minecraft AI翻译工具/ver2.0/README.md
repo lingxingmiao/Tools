@@ -69,7 +69,7 @@ conda env remove -n Translator_Minecraft
 ### Release.1.2 Bata.1
 - 添加 自动汉化更新 的 I18n词典 导入参考词功能（Dict-Mini.json）
 - 添加 向量索引缓存功能（SHA3-256校验 .pkl 与 .npy 文件，生成 .faiss-sha3 与 .faiss 文件）
-- 更改 存储的格式从 .npy 改为 .npz，格式可选:
+- 更改 向量存储的格式从 .npy 改为 .npz，格式可选:
     - Float32(100%)
     - Float16_S1M15(99.99999237%)
     - Int8+Float16(98.4445%)
@@ -83,3 +83,10 @@ conda env remove -n Translator_Minecraft
 - 添加 已安装的整合包翻译支持 ×
 - 添加 GUI（纯AI编写）
 - 更改 分离Argparse
+### Release.1.3 Bata.1（计划）
+- 大量修改传入方式
+- 添加 IndexRefineFlat 方法
+- 添加 向量存储的格式 .png（部分情况压缩率比 .npz 好）
+    - Int8+Float16(98.4445%)
+    - Int4+Float16(96.8631%)
+- 修复 GUI 开始多文件无法传入（忘写了）
