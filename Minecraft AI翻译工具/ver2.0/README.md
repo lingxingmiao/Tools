@@ -86,7 +86,6 @@ conda env remove -n Translator_Minecraft
 ### Release.1.3 Bata.1（计划）
 - 大量修改传入方式
 - 添加 IndexRefineFlat 方法
-- 添加 向量存储的格式 .png（部分情况压缩率比 .npz 好）
-    - Int8+Float16(98.4445%)
-    - Int4+Float16(96.8631%)
+- 添加 翻译资源文件 单文件传入键值自动补全
+- 添加 模糊匹配语言代码
 - 修复 GUI 开始多文件无法传入（忘写了）
