@@ -79,10 +79,10 @@
 2. 下载[Adafruit_CircuitPython_HID](https://github.com/adafruit/Adafruit_CircuitPython_HID)，把adafruit _hid整个文件夹扔到开发板的lib目录；
 3. 下载这里的 code.py，然后扔到根目录。
 
-### 日志
-#### 十月中旬
+### 更新日志
+#### 2025年10月
 - 创建 main4_2.py；
 - 添加 稍微可用的纠错算法；
 - 添加 脚本功能。
-#### 下次
+#### 2025年11-12月
 - 添加 音频字幕生成。
