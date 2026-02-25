@@ -69,7 +69,7 @@ conda env remove -n Translator_Minecraft
 - 添加 思考模型支持
 - 添加 额外依赖 ujson
 ### Release.1.2 Bata.1
-- 添加 自动汉化更新 的 I18n词典 导入参考词功能（Dict-Mini.json）
+- 添加 自动汉化更新 的 I18n词典 导入参考词功能（[Dict-Mini.json](https://github.com/CFPATools/i18n-dict)）
 - 添加 向量索引缓存功能（SHA3-256校验 .pkl 与 .npy 文件，生成 .faiss-sha3 与 .faiss 文件）
 - 更改 向量存储的格式从 .npy 改为 .npz，格式可选:
     - Float32(100%)
