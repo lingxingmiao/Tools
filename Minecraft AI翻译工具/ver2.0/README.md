@@ -18,9 +18,11 @@ Translator Minecraft 是 Translator Lang 的神经续作（第一个版本维护
 - [NomicEmbed文本嵌入v2专家混合8*227M 768维](https://hf-mirror.com/nomic-ai/nomic-embed-text-v2-moe-GGUF/tree/main)（推荐 Q8_0 Q4_K_S，缺点只支持 512 Tokens）（Q8_0 参考速度：133）
 - [通义千问嵌入0.6B 1024维](https://hf-mirror.com/Casual-Autopsy/Qwen3-Embedding-0.6B-GGUFs/tree/main)（推荐 Q4_K_S，这个上下文长度巨吃显存）（Q4_0 参考速度：137）
 ##### 翻译模型
-- [通义千问3 80B-A3B](https://hf-mirror.com/unsloth/Qwen3-Next-80B-A3B-Instruct-GGUF/tree/main)（我V100 16G显存不够我用的 UD-Q2_K_XL）（UD-Q2_K_XL 砖家权重加载到CPU参考速度：14+ Tokens）
-- [通义千问3 30B-A3B](https://hf-mirror.com/mradermacher/Qwen3-30B-A3B-Instruct-2507-i1-GGUF/tree/main)（推荐 IQ3_M，还算不错）（IQ3_M 参考速度：50+ Tokens）
-- [通义千问2.5 14B](https://hf-mirror.com/Mungert/Qwen2.5-14B-Instruct-1M-GGUF/tree/main)（推荐 Q5_K_S IQ3_M，这个一直很稳定的，但是费电，显存不够用这个）（F16-Q4 参考速度：47+ Tokens）
+- [通义千问3.5 122B-A10B](https://hf-mirror.com/unsloth/Qwen3.5-122B-A10B-GGUF/tree/main)（内存还是太便宜了，32G一条400）（UD-Q2_K_XL 36层CPU 8层GPU 参考速度：12+ TPS）
+- [通义千问3 80B-A3B](https://hf-mirror.com/unsloth/Qwen3-Next-80B-A3B-Instruct-GGUF/tree/main)（我V100 16G显存不够我用的 UD-Q2_K_XL）（UD-Q2_K_XL 砖家权重加载到CPU参考速度：14+ TPS）
+- [通义千问3.5 35B-A3B](https://hf-mirror.com/unsloth/Qwen3.5-35B-A3B-GGUF/tree/main)（难蚌这速度）（UD-Q2_K_XL 参考速度：31+ TPS）
+- [通义千问3 30B-A3B](https://hf-mirror.com/mradermacher/Qwen3-30B-A3B-Instruct-2507-i1-GGUF/tree/main)（推荐 IQ3_M，还算不错）（UD-Q2_K_XL 参考速度：50+ TPS）
+- [通义千问2.5 14B](https://hf-mirror.com/Mungert/Qwen2.5-14B-Instruct-1M-GGUF/tree/main)（推荐 Q5_K_S IQ3_M，这个一直很稳定的，但是费电，显存不够用这个）（F16-Q4 参考速度：47+ TPS）
 ## 编译
 ```powershell
 conda create -n Translator_Minecraft python=3.12 -y
@@ -72,8 +74,8 @@ conda env remove -n Translator_Minecraft
 - 更改 向量存储的格式从 .npy 改为 .npz，格式可选:
     - Float32(100%)
     - Float16_S1M15(99.99999237%)
-    - Int8+Float16(98.4445%)
-    - Int4+Float16(96.8631%)
+    - Int8+Float16 (99.99821782%)
+    - Int4+Float16 (99.49891567%)
 - 修复 FTBQ 与 BQ 任务翻译无法传入的问题
 - 删除 额外依赖 ujson
 ### Release.1.2 Bata.2
@@ -88,4 +90,7 @@ conda env remove -n Translator_Minecraft
 - 添加 IndexRefineFlat 方法
 - 添加 翻译资源文件 单文件传入键值自动补全
 - 添加 模糊匹配语言代码
+- 更改 向量存储的格式从 Int4/8 量化的 块缩放 格式从 Float16 改为 Float16_S1M15：
+    - Int8+Float16(99.99827147%)
+    - Int4+Float16(99.49955940%)
 - 修复 GUI 开始多文件无法传入（忘写了）
