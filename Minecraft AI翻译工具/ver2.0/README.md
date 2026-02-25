@@ -91,6 +91,6 @@ conda env remove -n Translator_Minecraft
 - 添加 翻译资源文件 单文件传入键值自动补全
 - 添加 模糊匹配语言代码
 - 更改 向量存储的格式从 Int4/8 量化的 块缩放 格式从 Float16 改为 Float16_S1M15：
-    - Int8+Float16(99.99827147%)
-    - Int4+Float16(99.49955940%)
+    - Int8+Float16_S1M15(99.99827147%)
+    - Int4+Float16_S1M15(99.49955940%)
 - 修复 GUI 开始多文件无法传入（忘写了）
