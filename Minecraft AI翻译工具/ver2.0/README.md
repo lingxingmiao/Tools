@@ -85,12 +85,16 @@ conda env remove -n Translator_Minecraft
 - 添加 已安装的整合包翻译支持 ×
 - 添加 GUI（纯AI编写）
 - 更改 分离Argparse
-### Release.1.3 Bata.1（计划）
+### Release.1.3 Bata.1
 - 大量修改传入方式
 - 添加 IndexRefineFlat 方法
 - 添加 翻译资源文件 单文件传入键值自动补全
 - 添加 模糊匹配语言代码
+- 添加 日志功能（目前只有 翻译资源文件、翻译语言文件、生成翻译 有写入日志）
 - 更改 向量存储的格式从 Int4/8 量化的 块缩放 格式从 Float16 改为 Float16_S1M15：
     - Int8+Float16_S1M15(99.99827147%)
     - Int4+Float16_S1M15(99.49955940%)
 - 修复 GUI 开始多文件无法传入（忘写了）
+
+### Release.1.3 Bata.2（便秘中）
+开始便秘，随机添加一些构思功能
