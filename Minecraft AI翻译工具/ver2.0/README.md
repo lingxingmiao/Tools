@@ -98,4 +98,5 @@ conda env remove -n Translator_Minecraft
 
 ### Release.1.3 Bata.2（便秘中）
 开始便秘，随机添加一些构思功能
+- 添加 翻译解析错误重试功能
 - 修复 Json 语言文件解析错误
