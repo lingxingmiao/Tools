@@ -28,7 +28,9 @@ Translator Minecraft 是 Translator Lang 的神经续作（第一个版本维护
 conda create -n Translator_Minecraft python=3.12 -y
 conda activate Translator_Minecraft
 pip install numpy faiss-cpu tqdm requests pyhocon
+conda install anaconda::cupy
 # 向量处理 向量索引 进度显示* 网络请求* FTB任务snbt编解码
+# 向量处理加速
 
 pip install pyinstaller
 pyinstaller -w --hidden-import=requests "TranslatorGui.py"
