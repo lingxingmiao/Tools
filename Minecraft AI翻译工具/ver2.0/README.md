@@ -1,35 +1,32 @@
 # Translator Minecraft
 Translator Minecraft 是 Translator Lang 的神经续作（第一个版本维护不动了）。
 ## 功能
-### 移植的功能
+### 移植
 - 翻译 lang 与 json 格式的语言文件
 - 翻译 zip 资源包、光影包 与 jar 模组
 - RAG检索 EM-2P
 - 并发并行向量生成 与 并发翻译生成
 - 导出数据集功能
-### 不做的功能
+### 否决
 - 推测解码
 - 思考等级
-## API来源
-通用/英伟达/AMD：[LM Studio](https://lmstudio.ai/)
-英特尔：[Ollama](https://github.com/ipex-llm/ipex-llm/releases/tag/v2.2.0)
-#### 推荐模型
-##### 嵌入模型
-- [NomicEmbed文本嵌入v2专家混合8*227M 768维](https://hf-mirror.com/nomic-ai/nomic-embed-text-v2-moe-GGUF/tree/main)（推荐 Q8_0 Q4_K_S，缺点只支持 512 Tokens）（Q8_0 参考速度：133）
-- [通义千问嵌入0.6B 1024维](https://hf-mirror.com/Casual-Autopsy/Qwen3-Embedding-0.6B-GGUFs/tree/main)（推荐 Q4_K_S，这个上下文长度巨吃显存）（Q4_0 参考速度：137）
-##### 翻译模型
-- [通义千问3.5 122B-A10B](https://hf-mirror.com/unsloth/Qwen3.5-122B-A10B-GGUF/tree/main)（内存还是太便宜了，32G一条400）（UD-Q2_K_XL 36层CPU 8层GPU 参考速度：12+ TPS）
-- [通义千问3 80B-A3B](https://hf-mirror.com/unsloth/Qwen3-Next-80B-A3B-Instruct-GGUF/tree/main)（我V100 16G显存不够我用的 UD-Q2_K_XL）（UD-Q2_K_XL 砖家权重加载到CPU参考速度：14+ TPS）
-- [通义千问3.5 35B-A3B](https://hf-mirror.com/unsloth/Qwen3.5-35B-A3B-GGUF/tree/main)（难蚌这速度）（UD-Q2_K_XL 参考速度：31+ TPS）
-- [通义千问3 30B-A3B](https://hf-mirror.com/mradermacher/Qwen3-30B-A3B-Instruct-2507-i1-GGUF/tree/main)（推荐 IQ3_M，还算不错）（UD-Q2_K_XL 参考速度：50+ TPS）
-- [通义千问2.5 14B](https://hf-mirror.com/Mungert/Qwen2.5-14B-Instruct-1M-GGUF/tree/main)（推荐 Q5_K_S IQ3_M，这个一直很稳定的，但是费电，显存不够用这个）（F16-Q4 参考速度：47+ TPS）
-## 编译
+
+# 推荐配置
+- 中央处理器：CPU-Z多核3000分以上的64位处理器
+- 计算加速器：NVIDIA支持CUDA Toolkit 12.0的Maxwell以上架构 4GB内存（非必须）
+- 内存：4GB（按向量大小）
+- 存储：4GB（按向量大小）
+
+## 编译/环境设置
 ```powershell
 conda create -n Translator_Minecraft python=3.12 -y
 conda activate Translator_Minecraft
 pip install numpy faiss-cpu tqdm requests pyhocon
-conda install anaconda::cupy
 # 向量处理 向量索引 进度显示* 网络请求* FTB任务snbt编解码
+pip install -U "sentence-transformers[onnx]" # 或 pip install -U "sentence-transformers[onnx-gpu]"
+pip install einops
+# 内置向量生成
+conda install anaconda::cupy
 # 向量处理加速
 
 pip install pyinstaller
@@ -100,5 +97,7 @@ conda env remove -n Translator_Minecraft
 
 ### Release.1.3 Bata.2（便秘中）
 开始便秘，随机添加一些构思功能
-- 添加 翻译解析错误重试功能
+- 添加 翻译解析/向量生成 错误重试功能
+- 添加 CuPy 加速支持
+- 添加 SentenceTransformer 自动加载模型（ONNX、Safetensors）
 - 修复 Json 语言文件解析错误
