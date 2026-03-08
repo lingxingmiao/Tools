@@ -13,6 +13,24 @@
 
 # 小型开源模型排行
 仅个人观点，可以信不是很能信
+MOE模型推荐4bit以上量化，如：MXFP4、Q4_K_M
+
+### 翻译
+非格式化输出，Python列表输出，16G VRAM 塞不下将砖家放到 CPU 计算
+#### 翻译速度 第一名开始高到低：
+- [LiquidAI/LFM2-24B-A2B](https://huggingface.co/LiquidAI/LFM2-24B-A2B)
+- [Tencent/HY-MT1.5-7B](https://huggingface.co/tencent/HY-MT1.5-7B)
+- [Qwen/Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B)
+- [Qwen/Qwen3-30B-A3B-Instruct-2507](https://huggingface.co/Qwen/Qwen3-30B-A3B-Instruct-2507)
+- [Qwen/Qwen3.5-35B-A3B](https://huggingface.co/Qwen/Qwen3.5-35B-A3B)
+- [Qwen/Qwen3.5-27B](https://huggingface.co/Qwen/Qwen3.5-27B)
+- [Qwen/Qwen3-Next-80B-A3B-Instruct](https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct)
+- [Qwen/Qwen3.5-122B-A10B](https://huggingface.co/Qwen/Qwen3.5-122B-A10B)
+
+#### 输出兼容性与稳定性 倒一名开始低到高：
+- [LiquidAI/LFM2-24B-A2B](https://huggingface.co/LiquidAI/LFM2-24B-A2B)（纯文本没什么问题）
+- [Tencent/HY-MT1.5-7B](https://huggingface.co/tencent/HY-MT1.5-7B)（概率输出问题）
+
 ### RolePlay（角色扮演）
 第一名开始高到低：
 - [MistralAi/Mistral-Small-3.2-24B-2506](https://huggingface.co/mistralai/Mistral-Small-3.2-24B-Instruct-2506)
