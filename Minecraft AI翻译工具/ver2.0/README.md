@@ -102,7 +102,8 @@ conda env remove -n Translator_Minecraft
 - 添加 翻译解析/向量生成 错误重试功能
 - 添加 CuPy 加速支持
 - 添加 SentenceTransformer 自动加载模型（ONNX、Safetensors）
-- 添加 向量存储格式: （别问会不会有Int5 Int7 S1M11）
+- 添加 向量存储格式:
+    - Float24_S1M23(100%) 
     - Int6+Float16_S1M15
     - Int3+Float16_S1M15
     - Int2+Float16_S1M15
