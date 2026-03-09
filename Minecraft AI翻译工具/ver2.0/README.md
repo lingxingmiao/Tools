@@ -26,7 +26,7 @@ pip install numpy faiss-cpu tqdm requests pyhocon
 pip install -U "sentence-transformers[onnx]" # 或 pip install -U "sentence-transformers[onnx-gpu]"
 pip install einops
 pip install uninstall torch
-pip install torch==2.9.1 torchvision==0.24.1 torchaudio==2.9.1 --index-url https://download.pytorch.org/whl/cu130
+pip install torch==2.9.1 torchvision==0.24.1 torchaudio==2.9.1 --index-url https://download.pytorch.org/whl/cu128
 # 内置向量生成
 conda install anaconda::cupy
 # 向量处理加速
