@@ -13,7 +13,7 @@ Translator Minecraft 是 Translator Lang 的神经续作（第一个版本维护
 
 # 推荐配置
 - 中央处理器：CPU-Z多核3000分以上的64位处理器
-- 计算加速器：NVIDIA支持CUDA Toolkit 12.0的Maxwell以上架构 4GB内存（非必须）
+- 计算加速器：NVIDIA支持CUDA Toolkit 12.0的Maxwell以上架构 8GB内存（非必须）
 - 内存：4GB（按向量大小）
 - 存储：4GB（按向量大小）
 
@@ -27,7 +27,6 @@ pip install -U "sentence-transformers[onnx]" # 或 pip install -U "sentence-tran
 pip install einops
 pip install uninstall torch
 pip install torch==2.9.1 torchvision==0.24.1 torchaudio==2.9.1 --index-url https://download.pytorch.org/whl/cu128
-pip install https://github.com/kingbri1/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu128torch2.8.0cxx11abiFALSE-cp312-cp312-win_amd64.whl
 # 内置向量生成
 conda install anaconda::cupy
 # 向量处理加速
@@ -103,4 +102,10 @@ conda env remove -n Translator_Minecraft
 - 添加 翻译解析/向量生成 错误重试功能
 - 添加 CuPy 加速支持
 - 添加 SentenceTransformer 自动加载模型（ONNX、Safetensors）
+- 添加 向量存储格式:
+    - Int6+Float16_S1M15
+    - Int3+Float16_S1M15
+    - Int2+Float16_S1M15
 - 修复 Json 语言文件解析错误
+- 修复 单次多词 参考词仅传入一个的问题
+- 修复 增加向量 时发生的错误
