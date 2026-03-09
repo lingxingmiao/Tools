@@ -27,6 +27,7 @@ pip install -U "sentence-transformers[onnx]" # 或 pip install -U "sentence-tran
 pip install einops
 pip install uninstall torch
 pip install torch==2.9.1 torchvision==0.24.1 torchaudio==2.9.1 --index-url https://download.pytorch.org/whl/cu128
+pip install https://github.com/kingbri1/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu128torch2.8.0cxx11abiFALSE-cp312-cp312-win_amd64.whl
 # 内置向量生成
 conda install anaconda::cupy
 # 向量处理加速
