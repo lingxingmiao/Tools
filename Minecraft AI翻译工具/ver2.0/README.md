@@ -73,10 +73,10 @@ conda env remove -n Translator_Minecraft
 - 添加 自动汉化更新 的 I18n词典 导入参考词功能（[Dict-Mini.json](https://github.com/CFPATools/i18n-dict)）
 - 添加 向量索引缓存功能（SHA3-256校验 .pkl 与 .npy 文件，生成 .faiss-sha3 与 .faiss 文件）
 - 更改 向量存储的格式从 .npy 改为 .npz，格式可选:
-    - Float32(100%)
-    - Float16_S1M15(99.99999237%)
-    - Int8+Float16 (99.99821782%)
-    - Int4+Float16 (99.49891567%)
+    - Float32
+    - Float16_S1M15
+    - Uint8+Float16
+    - Uint4+Float16
 - 修复 FTBQ 与 BQ 任务翻译无法传入的问题
 - 删除 额外依赖 ujson
 ### Release.1.2 Bata.2
@@ -93,8 +93,8 @@ conda env remove -n Translator_Minecraft
 - 添加 模糊匹配语言代码
 - 添加 日志功能（目前只有 翻译资源文件、翻译语言文件、生成翻译 有写入日志）
 - 更改 向量存储的格式从 Int4/8 量化的 块缩放 格式从 Float16 改为 Float16_S1M15：
-    - Int8+Float16_S1M15(99.99827147%)
-    - Int4+Float16_S1M15(99.49955940%)
+    - Uint8+Float16_S1M15(99.99827147%)
+    - Uint4+Float16_S1M15(99.49955940%)
 - 修复 GUI 开始多文件无法传入（忘写了）
 
 ### Release.1.3 Bata.2（便秘中）
@@ -102,11 +102,28 @@ conda env remove -n Translator_Minecraft
 - 添加 翻译解析/向量生成 错误重试功能
 - 添加 CuPy 加速支持
 - 添加 SentenceTransformer 自动加载模型（ONNX、Safetensors）
+- 添加 更改 单个词语 翻译为 字符串 而不是 列表
 - 添加 向量存储格式:
-    - Float24_S1M23(100%) 
-    - Int6+Float16_S1M15
-    - Int3+Float16_S1M15
-    - Int2+Float16_S1M15
+    - Float16
+    - BFloat16
+    - Uint6+Float16_S1M15
+    - Uint3+Float16_S1M15
+    - Uint2+Float16_S1M15
 - 修复 Json 语言文件解析错误
 - 修复 单次多词 参考词仅传入一个的问题
 - 修复 增加向量 时发生的错误
+- 修改 拆分 Config 类与 Quantization 类到两个新的文件
+
+
+| RMSE/余弦相似度损失 | [-1, 1] | [-32, 31] | [-131072, 131071] | 压缩率 | 原生支持 |
+| - | - | - | - | - | - |
+| Float32 | 0/0 | 0/0 | 0/0 | 1:1 | √ |
+| Float16 | 1.07E-4/0 | 3.41E-5/0 | inf/nan | 2:1 | √ |
+| BFloat16 | 1.3E-3/1E-6 | 5.46E-2/1E-6 | 223.45/1E-6 | 2:1 | × |
+| Float16_S1M15 | 9E-6/0 | inf/nan | inf/nan | 2:1 | × |
+| Uint8+Float16_S1M15 | 2.32E-3/8E-6 | 7.11E-2/8E-6 | 7.56E+4/1.2E-4 | 3.88:1 | × |
+| Uint6+Float16_S1M15 | 9E-3/1.2E-4 | 0.32/1.35E-4 | 7.57E+4/2.31E-4 | 5.12:1 | × |
+| Uint4+Float16_S1M15 | 3.76E-2/2.1E-3 | 12.18/2.21E-3 | 7.57E+4/2.21E-3 | 7.53:1 | × |
+| Uint3+Float16_S1M15 | 8.1E-2/9.37E-3 | 16.41/9.48E-3 | 7.57E+4/9.48E-3 | 9.85:1 | × |
+| Uint2+Float16_S1M15 | 0.19/4.37E-2 | 17.56/4.37E-2 | 7.57E+4/4.37E-2 | 14.22:1 | × |
+
