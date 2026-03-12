@@ -111,7 +111,7 @@ conda env remove -n Translator_Minecraft
 开始便秘，随机添加一些构思功能
 - 添加 翻译解析/向量生成 错误重试功能
 - 添加 CuPy 加速支持
-- 添加 SentenceTransformer 自动加载模型（ONNX、Safetensors）
+- 添加 SentenceTransformer 自动加载嵌入模型（ONNX、Safetensors）
 - 添加 更改 单个词语 翻译为 字符串 而不是 列表
 - 添加 I18n词典 导出 数据集 功能（[Dict-Mini.json](https://github.com/CFPATools/i18n-dict)）
 - 添加 分离语言文件更新 与 合并语言文件更新（手动翻译使用）
