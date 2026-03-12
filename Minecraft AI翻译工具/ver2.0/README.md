@@ -115,7 +115,7 @@ conda env remove -n Translator_Minecraft
 - 添加 更改 单个词语 翻译为 字符串 而不是 列表
 - 添加 I18n词典 导出 数据集 功能（[Dict-Mini.json](https://github.com/CFPATools/i18n-dict)）
 - 添加 分离语言文件更新 与 合并语言文件更新（手动翻译使用）
-- 添加 翻译缓存替换，并支持 I18n词典 导入（[Dict-Mini.json](https://github.com/CFPATools/i18n-dict)）（未完成）
+- 添加 翻译缓存替换（未完成）
 - 添加 导入DictMini参考词 添加 稠密 与 稀疏 模式（原先默认 稠密，稠密 性能好）
 - 添加 向量存储格式:
     - Float16
