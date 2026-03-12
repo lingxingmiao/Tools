@@ -42,26 +42,32 @@ conda env remove -n Translator_Minecraft
 - 添加 语言文件 翻译支持
 - 添加 IndexFlatL2方法RAG检索
 - 添加 额外依赖 numpy faiss-cpu
+
 ### Release.1 Bata.1
 - 添加 资源包 翻译支持 （光影，模组，资源包）
 - 添加 导出数据集功能
 - 添加 导入参考词功能
+
 ### Release.1 Bata.2
 - 修复 上下文 system 位置
 - 修复 系统提示词为 system 时不会添加 user 的问题
 - 添加 最大历史上下文
+
 ### Release.1
 - 添加 文件传入参数 （如何使用 这一栏）
+
 ### Release.1.1 Bata.1
 - 添加 FTBQ任务 翻译支持
 - 更改 IndexFlatL2索引 改为 IndexHNSWSQ索引(SQ8)
 - 更改 ThreadPoolExecutor索引并发 改为 Faiss并行
 - 添加 额外依赖 pyhocon
+
 ### Release.1.1 Bata.2
 - ~~修复了一些已知的问题。~~
 - 修复 IndexHNSWSQ索引 没有训练就构建的错误
 - 添加 BQ任务 翻译支持
 - 添加 思考模型支持（仅为强制思考模型做支持）
+
 ### Release.1.1
 - 修复 翻译语言文件 双文件无法正确处理
 - 修复 无法传入上下文开关参数
@@ -69,6 +75,7 @@ conda env remove -n Translator_Minecraft
 - 添加 BQ任务 翻译支持 （选定版本 1.7.10 1.12.2）
 - 添加 思考模型支持
 - 添加 额外依赖 ujson
+
 ### Release.1.2 Bata.1
 - 添加 自动汉化更新 的 I18n词典 导入参考词功能（[Dict-Mini.json](https://github.com/CFPATools/i18n-dict)）
 - 添加 向量索引缓存功能（SHA3-256校验 .pkl 与 .npy 文件，生成 .faiss-sha3 与 .faiss 文件）
@@ -79,13 +86,16 @@ conda env remove -n Translator_Minecraft
     - Uint4+Float16
 - 修复 FTBQ 与 BQ 任务翻译无法传入的问题
 - 删除 额外依赖 ujson
+
 ### Release.1.2 Bata.2
 - 修复 单次多词 翻译键值映射问题
 - 更改 单次多词 格式
+
 ### Release.1.2
 - 添加 已安装的整合包翻译支持 ×
 - 添加 GUI（纯AI编写）
 - 更改 分离Argparse
+
 ### Release.1.3 Bata.1
 - 大量修改传入方式
 - 添加 IndexRefineFlat 方法
@@ -103,6 +113,9 @@ conda env remove -n Translator_Minecraft
 - 添加 CuPy 加速支持
 - 添加 SentenceTransformer 自动加载模型（ONNX、Safetensors）
 - 添加 更改 单个词语 翻译为 字符串 而不是 列表
+- 添加 I18n词典 导出 数据集 功能（[Dict-Mini.json](https://github.com/CFPATools/i18n-dict)）
+- 添加 分离语言文件更新 与 合并语言文件更新（手动翻译使用）
+- 添加 翻译缓存替换，并支持 I18n词典 导入（[Dict-Mini.json](https://github.com/CFPATools/i18n-dict)）（未完成）
 - 添加 向量存储格式:
     - Float16
     - BFloat16
@@ -113,6 +126,9 @@ conda env remove -n Translator_Minecraft
 - 修复 单次多词 参考词仅传入一个的问题
 - 修复 增加向量 时发生的错误
 - 修改 拆分 Config 类与 Quantization 类到两个新的文件
+- 修改 Lib 部分函数分离至一个新的文件（Module） 
+- 修改 翻译资源文件 合并至 翻译语言文件
+- 删除 Lib函数 删除 导出数据集 函数
 
 
 | RMSE/余弦相似度损失 | [-1, 1] | [-32, 31] | [-131072, 131071] | 压缩率 | 原生支持 |
