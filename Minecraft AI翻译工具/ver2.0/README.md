@@ -105,7 +105,6 @@ conda env remove -n Translator_Minecraft
 - 更改 向量存储的格式从 Int4/8 量化的 块缩放 格式从 Float16 改为 Float16_S1M15：
     - Uint8+Float16_S1M15(99.99827147%)
     - Uint4+Float16_S1M15(99.49955940%)
-- 修复 GUI 开始多文件无法传入（忘写了）
 
 ### Release.1.3 Bata.2
 - 添加 翻译解析/向量生成 错误重试功能
@@ -130,6 +129,10 @@ conda env remove -n Translator_Minecraft
 - 修改 翻译资源文件 合并至 翻译语言文件
 - 删除 Lib函数 删除 导出数据集 函数
 
+### Release.1.3 Bata.3
+- 大量修改传入方式
+- 修改 日志现在不用全塞一个文件了
+- 添加 MCP调用（GUI ARG停更了，因为我觉得这个才是未来）（工作中*）
 
 | RMSE/余弦相似度损失 | [-1, 1] | [-32, 31] | [-131072, 131071] | 压缩率 | 原生支持 |
 | - | - | - | - | - | - |
