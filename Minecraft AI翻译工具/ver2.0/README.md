@@ -27,12 +27,12 @@ pip install -U "sentence-transformers[onnx]" # 或 pip install -U "sentence-tran
 pip install einops
 pip install uninstall torch
 pip install torch==2.9.1 torchvision==0.24.1 torchaudio==2.9.1 --index-url https://download.pytorch.org/whl/cu128
-# 内置向量生成
+# 内置向量生成（可选）
 conda install anaconda::cupy
-# 向量处理加速
+# 向量处理加速（可选）
 
 pip install pyinstaller
-pyinstaller -w --hidden-import=requests "TranslatorGui.py"
+pyinstaller -w --hidden-import=requests "TranslatorMCPServer.py"
 
 conda deactivate
 conda env remove -n Translator_Minecraft
@@ -97,6 +97,7 @@ conda env remove -n Translator_Minecraft
 - 更改 分离Argparse
 
 ### Release.1.3 Bata.1
+ARG GUI停更
 - 大量修改传入方式
 - 添加 IndexRefineFlat 方法
 - 添加 翻译资源文件 单文件传入键值自动补全
@@ -129,10 +130,15 @@ conda env remove -n Translator_Minecraft
 - 修改 翻译资源文件 合并至 翻译语言文件
 - 删除 Lib函数 删除 导出数据集 函数
 
-### Release.1.3 Bata.3
+### Release.1.3
 - 大量修改传入方式
 - 修改 日志现在不用全塞一个文件了
-- 添加 MCP调用（GUI ARG停更了，因为我觉得这个才是未来）（工作中*）
+- 修改 所有（除了SentenceTransformer）需要导入的函数分离至 TranslationLib
+- 添加 日志、tqdm 本地化支持（默认Lang文件夹下 Minecraft同格式）
+- 添加 MCP调用（需要上占用下文约 4500Tokens）
+- 添加 系统变量:
+    - FENGMANG_GPU_ACC（是否启用GPU加速）
+    - FENGMANG_GPU_DEVICE_ID（GPU加速设备ID）
 
 | RMSE/余弦相似度损失 | [-1, 1] | [-32, 31] | [-131072, 131071] | 压缩率 | 原生支持 |
 | - | - | - | - | - | - |
