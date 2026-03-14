@@ -32,7 +32,7 @@ conda install anaconda::cupy
 # 向量处理加速（可选）
 
 pip install pyinstaller
-pyinstaller -w --hidden-import=requests "TranslatorMCPServer.py"
+pyinstaller --hidden-import=requests "TranslatorMCPServer.py"
 
 conda deactivate
 conda env remove -n Translator_Minecraft
