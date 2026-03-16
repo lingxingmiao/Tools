@@ -9,5 +9,7 @@
    1. 安装[CMake](https://cmake.org/download/) cmake-4.3.0-rc3-windows-x86_64.msi
 4. 编译 llama.cpp
    1. 克隆llama.cpp `git clone https://github.com/ggerganov/llama.cpp`
-   2. 进入llama.cpp `cd llama.cpp/build`
-   3. 编译llama.cpp `cmake .. -G "Visual Studio 18 2026" -A x64 -DLLAMA_CURL=OFF` `cmake --build . --config Release`
+   2. 进入llama.cpp `cd llama.cpp`
+   3. 创建目录 `mkdir build`
+   4. 进入构建文件夹 `cd build`
+   5. 编译llama.cpp `cmake .. -G "Visual Studio 18 2026" -A x64 -DLLAMA_CURL=OFF` `cmake --build . --config Release`
