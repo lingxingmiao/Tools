@@ -10,4 +10,4 @@
 4. 编译 llama.cpp
    1. 克隆llama.cpp `git clone https://github.com/ggerganov/llama.cpp`
    2. 进入llama.cpp `cd llama.cpp/build`
-   3. 编译llama.cpp `cmake .. -G "Visual Studio 18 2026" -A x64 -DLLAMA_CURL=OFF`
+   3. 编译llama.cpp `cmake .. -G "Visual Studio 18 2026" -A x64 -DLLAMA_CURL=OFF` `cmake --build . --config Release`
