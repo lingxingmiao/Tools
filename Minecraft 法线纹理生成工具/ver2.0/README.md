@@ -2,7 +2,7 @@
 [Version 1.0](https://github.com/lingxingmiao/Tools/tree/main/Minecraft%20%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/ver1.0)
 的更高阶版本，包含了 Version 1.0 的绝大部分功能<br/>
 这一代版本性能远远低于 Version 1.0，平均慢50%，需要加速请使用multiprocessing<br/>
-图一包含视差（_n生成） 图二不包含视差（漫反射生成）
+图一包含视差需要光影（_n生成） 图二不包含视差无需光影（漫反射生成）
 <img width="1920" height="1080" alt="4d9b545f34397157e7cd5646e700caad" src="https://github.com/user-attachments/assets/ba613b65-1a9e-4b2e-91a2-a855a279d9c5" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a3c919fa-a644-4449-b843-a529cbce0536" />
 
