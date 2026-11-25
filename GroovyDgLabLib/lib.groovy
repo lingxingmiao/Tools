@@ -1,39 +1,18 @@
 // side: client
-
-// dglab_ws.groovy — 【纯 GrS 一体方案】GroovyScript 内置 DG-LAB V3 WebSocket 服务端
-// 放置到：minecraft/groovy/postInit/dglab_ws.groovy
-// 不需要 Minecraft-DG-LAB 模组、不需要 KubeJS、不需要外部中转服务器或 Python！
-// GrS 自己开 ServerSocket，DG-LAB App 扫码直连本机，脚本直接下发强度/波形。
-// 依赖：仅 JDK（java.net.Socket/ServerSocket + SHA1/Base64）+ Groovy 自带能力；破解版 GrS 需允许线程/网络
-// 协议：https://github.com/LemoBits/DGLAB-docs/blob/37f66a8.../docs/socket-control.md
-//
-// ==================== 对外接口（其它脚本这样调用） ====================
-// 本脚本把控制器实例存进 JVM 级 System Properties，任何脚本都能取到：
-//   def ctrl = System.getProperties().get('dglab.ctrl.instance')
-//   def srv  = System.getProperties().get('dglab.server.instance')
-//
-// DGLabCtrl 控制 API（ch = 'A' 或 'B'）：
-//   ctrl.bound                      是否有 App 已绑定（getter isBound）
-//   ctrl.addStrength(ch, v)         增加强度 v（0~200）
-//   ctrl.reduceStrength(ch, v)      减少强度 v
-//   ctrl.setStrength(ch, v)         设定强度到 v（0~200）
-//   ctrl.clearPulse(ch)             清空该通道波形队列（紧急停止）
-//   ctrl.pulse(ch, hexFrames)       下发波形帧 List<String>，每帧8字节HEX、每帧100ms
-//   DGLabCtrl.smoothPulse(freq, strength, frames)  生成固定频率/强度的波形帧
-//     freq: 10~1000Hz, strength: 0~100, frames: 帧数(×100ms=时长)
-//
-// 底层（DGLabLocalServer）：
-//   srv.sendMsg(String)             直接发原始 V3 业务消息（如 'strength-1+1+5'）
-//   srv.getQrCode(lanIp)            获取扫码链接
-//   srv.apps                        已绑定的 App 映射（clientId -> WsConn）
-//
-// 示例：其它脚本里受伤时加强度并给一段波形
-//   def ctrl = System.getProperties().get('dglab.ctrl.instance')
-//   if (ctrl?.bound) {
-//       ctrl.addStrength('A', 10)
-//       ctrl.pulse('A', DGLabCtrl.smoothPulse(50, 30, 10))
-//   }
-// =================================================================
+// ============================================================
+// dglab_main.groovy — DG-LAB V3 脚本（本地 WS 服务端，郊狼 3.0 App 扫码直连）
+// 命令（全部无空格，GrS 对带空格参数触发不全）：
+//   /dglab-login-v3  启动 V3 服务端 + 显示按钮菜单
+//   /dglab-status    查看连接状态
+//   （按钮点击用内部命令 /dglab-action open|save|link，用户无需手输）
+// 调用（DgLab 类）：
+//   def d = new DgLab()
+//   d.addStrength('A', 10) / d.reduceStrength / d.setStrength / d.setTemp
+//   d.pulse('A', DgLab.smoothPulse(50,30,10)) / d.clearPulse('A')
+//   d.connected / d.info()
+// 底层控制器：System.getProperties().get('dglab.ctrl.instance')
+// 协议参考：https://github.com/LemoBits/DGLAB-docs
+// ============================================================
 
 import java.net.Socket
 import java.net.ServerSocket
@@ -42,9 +21,9 @@ import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.security.SecureRandom
 import java.util.Base64
-import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.*
+import java.util.concurrent.atomic.AtomicLong
 
-// ---------- JSON 工具：优先 groovy.json，缺失回退到自带 MinimalJson ----------
 class MinimalJson {
     static String toJson(Object o) {
         if (o == null) return 'null'
@@ -294,6 +273,11 @@ class DGLabLocalServer {
         return "https://www.dungeon-lab.com/app-download.php#DGLAB-SOCKET#ws://${lanIp}:${port}/${terminalId}"
     }
 
+    /** 纯 WebSocket 地址（供复制链接按钮用） */
+    String getWsUrl(String lanIp) {
+        return "ws://${lanIp}:${port}/${terminalId}"
+    }
+
     void stop() {
         running = false
         try { server?.close() } catch (Throwable ignored) {}
@@ -326,63 +310,19 @@ class DGLabCtrl {
         }
     }
 
-    /** 固定频率/强度波形帧：freqHz 10~1000，strength 0~100，frames 帧数 */
+    /** 固定频率/强度波形帧：freqHz 10~1000，strength 0~100，frames 帧数
+     *  修复：原来 strength 参数是摆设（写死 periodMs*0.1），现在真正决定导通强度。
+     *  帧结构 [间隙,0,0,0, 强度,0,0,0]：第5字节=强度(越大越强)，第1字节=间隙(越大越弱)。
+     *  与 gt_shock_dglab.groovy 的 makeWaveFrame 完全一致。
+     */
     static List<String> smoothPulse(double freqHz, int strength, int frames) {
         int periodMs = Math.max(10, (int) Math.round(1000.0 / freqHz))
-        int a = Math.min(100, Math.max(1, (int)(periodMs * 0.1)))
-        int gap = Math.max(0, periodMs - a)
-        String hex = String.format('%02X%02X%02X%02X%02X%02X%02X%02X', a, 0, 0, 0, gap, 0, 0, 0)
+        int s = Math.min(100, Math.max(1, strength))     // 强度 1~100，直接生效
+        int gap = Math.max(1, periodMs - s)              // 间隙 = 周期 - 强度，保底 1
+        String hex = String.format('%02X%02X%02X%02X%02X%02X%02X%02X', gap, 0, 0, 0, s, 0, 0, 0)
         return (1..frames).collect { hex }
     }
 }
-
-// ================= 脚本主体：启动服务端并打印扫码链接 =================
-// 端口与 config 无关，随便定（手机要能访问）。想换端口改这里。
-def PORT = 5678
-// 自动探测局域网 IP；探测不到就显示 127.0.0.1（此时手机连不上，请手动改）
-def lanIp = java.net.NetworkInterface.getNetworkInterfaces().toList()
-        .findAll { it.up }
-        .collectMany { it.inetAddresses.toList() }
-        .findAll { it instanceof java.net.Inet4Address && !it.loopbackAddress && !it.linkLocalAddress }
-        .collect { it.hostAddress }
-        .find { it.startsWith('192.168') || it.startsWith('10.') || it.startsWith('172.') } ?: '127.0.0.1'
-// 存进 Properties，供 /dglabqr 指令生成二维码时使用
-System.getProperties().put('dglab.lan.ip', lanIp)
-
-// 热重载安全：先把上一次脚本运行留下的服务端关掉，避免 5678 端口被占用 / 重复实例 / 线程堆积。
-// 用 JVM 级 System Properties 存实例，因为 GrS 重载会重新加载脚本类，脚本内的静态字段会被重置。
-def SERVER_KEY = 'dglab.server.instance'
-def CTRL_KEY = 'dglab.ctrl.instance'
-def prev = System.getProperties().get(SERVER_KEY)
-if (prev != null) {
-    try { prev.stop() } catch (Throwable ignored) {}
-}
-def server = new DGLabLocalServer(PORT)
-def ctrl = new DGLabCtrl(server)
-System.getProperties().put(SERVER_KEY, server)
-System.getProperties().put(CTRL_KEY, ctrl)
-server.onLog = { String s -> println s }
-server.start()
-println '[DGLab] ===== 用 DG-LAB App 扫码连接 ====='
-println server.getQrCode(lanIp)
-println '[DGLab] 需要二维码图片时，在聊天栏输入 /dglabqr'
-println '[DGLab] ================================='
-
-// 事件示例（1.12.2 Forge 类名；需要 MC 类参与编译，在原版 GrS 环境直接放开即可）：
-// eventManager.listen(net.minecraftforge.event.entity.living.LivingHurtEvent) { e ->
-//     if (e.entity instanceof net.minecraft.entity.player.EntityPlayer && ctrl.bound) {
-//         int s = Math.min(100, (int) Math.ceil((e.amount / 20f) * 100))
-//         ctrl.addStrength('A', s)
-//         ctrl.pulse('A', DGLabCtrl.smoothPulse(50, s, 10))
-//     }
-// }
-// eventManager.listen(net.minecraftforge.event.entity.living.LivingDeathEvent) { e ->
-//     if (e.entity instanceof net.minecraft.entity.player.EntityPlayer) {
-//         ctrl.clearPulse('A'); ctrl.setStrength('A', 0); ctrl.setStrength('B', 0)
-//     }
-// }
-
-
 
 // ==================== QR 编码器（nayuki, MIT，转译为 Groovy，前缀 DgQR_） ====================
 // 用于把扫码链接编码成二维码矩阵；已在本地与 Java 原版逐位比对一致并通过 zxing 解码验证。
@@ -1700,94 +1640,210 @@ public final class DgQR_QrCode {
 }
 
 
-// ==================== 二维码图片生成 + 系统默认程序打开 ====================
-// 生成 PNG 图片（JDK 自带 BufferedImage/ImageIO），用系统默认程序打开，
-// 彻底避开日志等宽字体错位导致扫不了的问题。
-// 用静态类而不是闭包：类定义是编译期的，避免脚本「先调用后定义」的时序问题。
-class DgQrImage {
-    static void writeAndOpen(String text) {
-        // 用编译期直接类名引用，不走 Class.forName（GrS 沙箱会拦运行期类查找）
-        def qr = DgQR_QrCode.encodeText(text, DgQR_QrCode.DgQR_Ecc.MEDIUM)
-        int n = qr.size
-        int quiet = 4            // 静默区（模块数）
-        int scale = 10           // 每模块像素
-        int side = (n + quiet * 2) * scale
 
+
+
+// ==================== 协议管理（全局状态存 System Properties） ====================
+class DgLabManager {
+    static final String V3_SRV = 'dglab.server.instance'
+    static final String V3_CTRL = 'dglab.ctrl.instance'
+
+    static String protocol(){ return 'v3' }
+    static void setProtocol(String p){ /* V3 only */ }
+
+    /** 确保 V3 服务端已启动（幂等）。用 duck typing，避免 reload 后新旧 Class 强转失败 */
+    static def ensureV3(int port){
+        def prev = System.getProperties().get(V3_SRV)
+        if(prev != null) {
+            try { if(prev.running) return System.getProperties().get(V3_CTRL) } catch(Throwable ignored){}
+            try { prev.stop() } catch(Throwable ignored){}
+        }
+        def srv = new DGLabLocalServer(port)
+        def ctrl = new DGLabCtrl(srv)
+        System.getProperties().put(V3_SRV, srv)
+        System.getProperties().put(V3_CTRL, ctrl)
+        srv.onLog = { String s -> println s }
+        srv.start()
+        println '[DGLab] V3 服务端已启动，端口 ' + port
+        String ip = (System.getProperties().get('dglab.lan.ip') ?: '127.0.0.1').toString()
+        println '[DGLab] 扫码: ' + srv.getQrCode(ip)
+        return ctrl
+    }
+
+}
+
+// ==================== 统一 DgLab 门面（V3 only） ====================
+class DgLab {
+    private final Object ctrl
+
+    DgLab(){ this.ctrl = System.getProperties().get(DgLabManager.V3_CTRL) }
+
+    boolean isConnected(){
+        if(ctrl == null) return false
+        try { return (boolean) ctrl.bound } catch(Throwable t){ return false }
+    }
+    Map info(){ return [protocol:'v3'] }
+
+    void addStrength(String ch, int v){
+        try { ctrl.addStrength(ch, v) } catch(Throwable ignored){}
+    }
+    void reduceStrength(String ch, int v){
+        try { ctrl.reduceStrength(ch, v) } catch(Throwable ignored){}
+    }
+    void setStrength(String ch, int v){
+        try { ctrl.setStrength(ch, v) } catch(Throwable ignored){}
+    }
+    void setTemp(String ch, int v, int ms){
+        try { ctrl.setStrength(ch, v); ctrl.setStrength(ch, 0) } catch(Throwable ignored){}
+    }
+    void pulse(String ch, List<String> frames){
+        try { ctrl.pulse(ch, frames) } catch(Throwable ignored){}
+    }
+    void clearPulse(String ch){
+        try { ctrl.clearPulse(ch) } catch(Throwable ignored){}
+    }
+    static List<String> smoothPulse(double freqHz, int strength, int frames){
+        return DGLabCtrl.smoothPulse(freqHz, strength, frames)
+    }
+}
+
+// ==================== 二维码图片（共用 DgQR_ 编码器） ====================
+class DgQrImage {
+    static String writePng(String text){
+        def qr = DgQR_QrCode.encodeText(text, DgQR_QrCode.DgQR_Ecc.MEDIUM)
+        int n = qr.size, quiet = 4, scale = 10
+        int side = (n + quiet*2)*scale
         def img = new java.awt.image.BufferedImage(side, side, java.awt.image.BufferedImage.TYPE_INT_RGB)
         def g = img.createGraphics()
-        g.setColor(java.awt.Color.WHITE)
-        g.fillRect(0, 0, side, side)
+        g.setColor(java.awt.Color.WHITE); g.fillRect(0,0,side,side)
         g.setColor(java.awt.Color.BLACK)
-        for (int row = 0; row < n; row++) {
-            for (int col = 0; col < n; col++) {
-                if (qr.getModule(col, row)) {
-                    g.fillRect((col + quiet) * scale, (row + quiet) * scale, scale, scale)
-                }
-            }
-        }
+        for(int row=0;row<n;row++) for(int col=0;col<n;col++)
+            if(qr.getModule(col,row)) g.fillRect((col+quiet)*scale,(row+quiet)*scale,scale,scale)
         g.dispose()
-
-        // 关键：GrS 沙箱在编译期把脚本里的 new File(...) 换成它自己的 GroovyFile，
-        // 一旦用 java.io.File 类型接收/强转就抛 GroovyCastException。
-        // 所以全程用「字符串路径 + NIO 写字节」，完全不碰 java.io.File。
-        String dirPath = System.getProperty('user.dir').toString()   // GroovyFile.toString() = 路径
+        String dirPath = System.getProperty('user.dir').toString()
         String outPath = dirPath + '/dglab_qr.png'
-
-        // 先把图片编码到内存字节流（ImageIO 的 OutputStream 重载，不接 File）
         def baos = new ByteArrayOutputStream()
-        javax.imageio.ImageIO.write(img, 'png', baos)
+        javax.imageio.ImageIO.write(img,'png',baos)
         byte[] bytes = baos.toByteArray()
-
-        // 写文件：多种方式兜底，都不用 java.io.File
-        boolean written = false
-        try {
-            java.nio.file.Files.write(java.nio.file.Paths.get(outPath), bytes)
-            written = true
-        } catch (Throwable ignored) {}
-        if (!written) {
-            try {
-                def fos = new FileOutputStream(outPath)
-                fos.write(bytes); fos.close()
-                written = true
-            } catch (Throwable ignored) {}
-        }
-        if (!written) {
-            println '[DGLab] 二维码图片写入失败，路径: ' + outPath
-            return
-        }
-        println '[DGLab] 二维码图片已生成: ' + outPath
-
-        // 用系统默认程序打开：ProcessBuilder(cmd start) 绕开 Desktop.open(File)
-        try {
-            new ProcessBuilder('cmd', '/c', 'start', '""', '"' + outPath + '"').start()
-            println '[DGLab] 已用系统默认程序打开二维码图片，请用 DG-LAB App 扫码'
-        } catch (Throwable t) {
-            println '[DGLab] 自动打开失败，请手动打开: ' + outPath + ' (' + t + ')'
-        }
+        boolean ok=false
+        try { java.nio.file.Files.write(java.nio.file.Paths.get(outPath), bytes); ok=true } catch(Throwable ignored){}
+        if(!ok){ try{ def f=new FileOutputStream(outPath); f.write(bytes); f.close(); ok=true }catch(Throwable ignored){} }
+        if(!ok){ println '[DGLab] 二维码写入失败: '+outPath; return null }
+        println '[DGLab] 二维码已保存: '+outPath
+        return outPath
+    }
+    static void openPng(String p){
+        try{ new ProcessBuilder('cmd','/c','start','""','"'+p+'"').start(); println '[DGLab] 已打开: '+p }
+        catch(Throwable t){ println '[DGLab] 打开失败，请手动打开: '+p }
     }
 }
 
-// ==================== /dglabqr 指令：手动打开二维码图片 ====================
-// 不再每次 reload 自动弹图片，改成需要时聊天栏输入 /dglabqr
-def showQr = {
+
+
+// ==================== 脚本主体：默认启动 V3，并注册命令 ====================
+def LAN_IP = java.net.NetworkInterface.getNetworkInterfaces().toList()
+        .findAll { it.up }
+        .collectMany { it.inetAddresses.toList() }
+        .findAll { it instanceof java.net.Inet4Address && !it.loopbackAddress && !it.linkLocalAddress }
+        .collect { it.hostAddress }
+        .find { it.startsWith('192.168') || it.startsWith('10.') || it.startsWith('172.') } ?: '127.0.0.1'
+System.getProperties().put('dglab.lan.ip', LAN_IP)
+DgLabManager.setProtocol('v3')
+try { DgLabManager.ensureV3(5678) } catch (Throwable t) { println '[DGLab] V3 启动失败: ' + t }
+
+// 生成 V3 二维码 URL / 纯链接
+def curPairUrl = {
+    def srv = System.getProperties().get(DgLabManager.V3_SRV)
+    return srv?.getQrCode(LAN_IP)
+}
+def curWsUrl = {
+    def srv = System.getProperties().get(DgLabManager.V3_SRV)
+    if(srv == null) return null
     try {
-        def s = System.getProperties().get('dglab.server.instance')
-        def ip = System.getProperties().get('dglab.lan.ip') ?: '127.0.0.1'
-        if (s == null) { println '[DGLab] 服务端未启动，无法生成二维码'; return }
-        DgQrImage.writeAndOpen(s.getQrCode(ip.toString()))
-    } catch (Throwable t) {
-        println '[DGLab] 生成二维码失败: ' + t
-    }
+        def m = srv.getClass().getDeclaredField('port'); m.setAccessible(true); int p = (int)m.get(srv)
+        def t = srv.getClass().getDeclaredField('terminalId'); t.setAccessible(true); String id = (String)t.get(srv)
+        return 'ws://' + LAN_IP + ':' + p + '/' + id
+    } catch (Throwable t) { return null }
 }
 
-// 入口1：客户端命令
-mods.minecraft.command.registerClientCommand('dglabqr', '/dglabqr - 打开 DG-LAB 二维码图片') { s, sender, args ->
-    net.minecraft.client.Minecraft.getMinecraft().addScheduledTask({ showQr() } as Runnable)
+// 聊天发消息（反射兼容映射）
+def dgSay = { msg ->
+    try {
+        def mc = net.minecraft.client.Minecraft.getMinecraft()
+        Object pl = null
+        for(String f:['player','thePlayer','field_71439_g']){ try{ pl=mc.getClass().getField(f).get(mc); if(pl!=null)break }catch(Throwable ignored){} }
+        if(pl==null){ println msg; return }
+        for(String m:['sendMessage','addChatMessage','func_145747_a']){
+            try{ pl.getClass().getMethod(m, net.minecraft.util.text.ITextComponent).invoke(pl,msg); break }catch(Throwable ignored){}
+        }
+    } catch(Throwable ignored){ println msg }
 }
-// 入口2：拦截聊天输入（GrS 事件闭包无参 + delegate=事件对象）
-eventManager.listen(net.minecraftforge.client.event.ClientChatEvent) {
-    if (message?.trim()?.toLowerCase() == '/dglabqr') {
-        setCanceled(true)
-        net.minecraft.client.Minecraft.getMinecraft().addScheduledTask({ showQr() } as Runnable)
-    }
+def dgClick = { String label, String action, String value, int color ->
+    def ActCls = net.minecraft.util.text.event.ClickEvent.Action
+    def act = (action=='run') ? ActCls.RUN_COMMAND : ActCls.SUGGEST_COMMAND
+    def style = new net.minecraft.util.text.Style().setClickEvent(new net.minecraft.util.text.event.ClickEvent(act, value))
+    style.setColor(net.minecraft.util.text.TextFormatting.values()[color])
+    return new net.minecraft.util.text.TextComponentString(label).setStyle(style)
 }
+def dgFillInput = { String text ->
+    try { net.minecraft.client.Minecraft.getMinecraft().displayGuiScreen(new net.minecraft.client.gui.GuiChat(text)); return true }
+    catch(Throwable t){ return false }
+}
+
+def showMenu = {
+    String proto = DgLabManager.protocol()
+    def root = new net.minecraft.util.text.TextComponentString('[DGLab ' + proto.toUpperCase() + '] 操作：')
+    root.appendSibling(dgClick(' [打开二维码]','run','/dglab-action open',11)); root.appendText(' ')
+    root.appendSibling(dgClick('[保存二维码]','run','/dglab-action save',10)); root.appendText(' ')
+    root.appendSibling(dgClick('[复制链接]','run','/dglab-action link',14))
+    dgSay(root)
+}
+
+def handleCmd = { String arg ->
+    try {
+        if(arg == 'status'){
+            def c = System.getProperties().get(DgLabManager.V3_CTRL)
+            boolean bound = c?.bound ?: false
+            dgSay(new net.minecraft.util.text.TextComponentString('[DGLab] V3 已连接=' + bound))
+        } else if(arg == 'open' || arg == 'save'){
+            String url = curPairUrl()
+            if(url==null){ dgSay(new net.minecraft.util.text.TextComponentString('[DGLab] 尚未就绪，稍候')); return }
+            String path = DgQrImage.writePng(url)
+            if(path!=null){
+                if(arg=='open'){ DgQrImage.openPng(path); dgSay(new net.minecraft.util.text.TextComponentString('[DGLab] 二维码已打开: '+path)) }
+                else dgSay(new net.minecraft.util.text.TextComponentString('[DGLab] 二维码已保存: '+path))
+            }
+        } else if(arg == 'link'){
+            String ws = curWsUrl()
+            if(ws==null){ dgSay(new net.minecraft.util.text.TextComponentString('[DGLab] 尚未就绪')); return }
+            boolean ok = dgFillInput(ws)
+            dgSay(new net.minecraft.util.text.TextComponentString(ok?'[DGLab] 链接已填入，Ctrl+A 全选、Ctrl+C 复制':'[DGLab] 请手动复制: '+ws))
+        } else if(arg == ''){
+            showMenu()
+        } else {
+            dgSay(new net.minecraft.util.text.TextComponentString('[DGLab] 未知子命令: ' + arg))
+        }
+    } catch(Throwable t){ println '[DGLab] 命令处理失败: ' + t; dgSay(new net.minecraft.util.text.TextComponentString('[DGLab] 出错: '+t.message)) }
+}
+
+// 登录指令：启动 V3 服务端并在聊天栏打印按钮
+def dgLogin = {
+    net.minecraft.client.Minecraft.getMinecraft().addScheduledTask({
+        try {
+            DgLabManager.ensureV3(5678)
+            dgSay(new net.minecraft.util.text.TextComponentString('[DGLab] V3 已启动'))
+            showMenu()
+        } catch(Throwable t){ println '[DGLab] 登录失败: ' + t }
+    } as Runnable)
+}
+
+mods.minecraft.command.registerClientCommand('dglab-login-v3', '/dglab-login-v3 - 启动 DG-LAB V3 服务端') { s, sender, args -> dgLogin() }
+mods.minecraft.command.registerClientCommand('dglab-status', '/dglab-status - 查看连接状态') { s, sender, args ->
+    net.minecraft.client.Minecraft.getMinecraft().addScheduledTask({ handleCmd('status') } as Runnable) }
+// 按钮点击用的内部命令（用户一般手动不输入；带空格参数由按钮自动发送，能正常传参）
+mods.minecraft.command.registerClientCommand('dglab-action', '/dglab-action - 内部按钮动作') { s, sender, args ->
+    net.minecraft.client.Minecraft.getMinecraft().addScheduledTask({
+        String a = (args && args.length>0) ? args[0].toLowerCase() : ''
+        handleCmd(a)
+    } as Runnable) }
+println '[DGLab] 已加载(V3 only)。/dglab-login-v3 启动（会显示按钮），/dglab-status 状态。'
