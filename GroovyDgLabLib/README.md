@@ -1,6 +1,7 @@
 <div align="center">
   <img width="240" height="150" alt="新建画布2" src="https://github.com/user-attachments/assets/19684757-8b1a-4c53-9178-f26afedafde5" />
 </div>
+
 # GroovyDgLabLib
 在 GroovyScript 脚本中使用 DG-LAB。</br>
 安装进 `.minecraft/groovy/postInit` 后使用 `/grs reload` 重载脚本，使用 `/dglab-login-v3` 打开登入菜单。</br></br>
